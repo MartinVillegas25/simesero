@@ -27,15 +27,15 @@ class Server {
 
 	middelewares() {
 
+		// Middleware para desactivar el almacenamiento en caché a nivel global
+				// this.app.use((req, res, next) => {
+				// 	res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+				// 	res.setHeader('Pragma', 'no-cache');
+				// 	res.setHeader('Expires', '0');
+				// 	next();
+				//   });
 		//directorio static
 		this.app.use(express.static(join(__dirname,'../client/dist')));
-		// Middleware para desactivar el almacenamiento en caché a nivel global
-				this.app.use((req, res, next) => {
-					res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-					res.setHeader('Pragma', 'no-cache');
-					res.setHeader('Expires', '0');
-					next();
-				  });
 
 		this.app.use(cors());
 		this.app.use(morgan('dev'));

@@ -23,7 +23,6 @@ export default function ClientHome() {
 	};
 
 	const handleOpenPopUp = (orderId) => {
-		console.log(orderId);
 		setSelectedPedidoId(orderId);
 		setPopUp(!popUp);
 	};
@@ -90,7 +89,6 @@ export default function ClientHome() {
 	}, []);
 
 	const pedidos = useSelector((state) => state.pedidos.pedidos);
-	console.log(pedidos);
 
 	const handleDelete = (e) => {
 		e.preventDefault();

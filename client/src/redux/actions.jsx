@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-const url = 'https://simesero-cadf72616f17.herokuapp.com'
+const url = 'http://localhost:3002'
 import axios from 'axios';
 
 export const CREATE_USER = 'CREATE_USER';
@@ -313,7 +313,7 @@ export function validateUser() {
 	return async function (dispatch) {
 		try {
 			const token = localStorage.getItem('token'); // Obtén el token almacenado en localStorage
-
+			
 			const headers = {
 				'x-token': token
 			};

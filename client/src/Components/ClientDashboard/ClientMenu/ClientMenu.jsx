@@ -31,14 +31,8 @@ export default function ClientMenu() {
 	const [newCategory, setNewCategory] = useState('');
 
 	const handleChangeCategory = (e) => {
-		setNewCategory(e.target.value);
+		setNewCategory(e.target.value.toUpperCase());
 	};
-	// const handleCreateCateg = () => {
-	// 	dispatch(createCategory({ nombre_categoria: newCategory }));
-	// 	setNewCategory('');
-	// 	setCategorySelected('');
-	// 	window.location.reload(true);
-	// };
 
 	const handleCreateCateg = (e) => {
 		e.preventDefault();
@@ -89,7 +83,7 @@ export default function ClientMenu() {
 	};
 	const [newSubCategory, setNewSubCategory] = useState('');
 	const handleChangeSubCategory = (e) => {
-		setNewSubCategory(e.target.value);
+		setNewSubCategory(e.target.value.toUpperCase());
 	};
 	const subcategories = useSelector(
 		(state) => state.localSubcategories.subcategorias
@@ -130,12 +124,13 @@ export default function ClientMenu() {
 	const handleChange = (e) => {
 		setInput((prevInput) => ({
 			...prevInput,
-			[e.target.name]: e.target.value
+			[e.target.name]: e.target.value.toUpperCase()
 		}));
 	};
 
 	const handleCreateProdcut = (e) => {
 		e.preventDefault();
+		
 		if (categorySelected === '') {
 			alert('Debe seleccionar una categoria');
 			return;
@@ -160,6 +155,7 @@ export default function ClientMenu() {
 				formData.append('img', input.img);
 				formData.append('categoria', input.categoria);
 				formData.append('subcategoria', input.subcategoria);
+				console.log(input);
 				dispatch(createProduct(formData));
 				swal({
 					text: `Se ha creado el producto`,

@@ -7,7 +7,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/socket.io': {
-				target: 'https://simesero-cadf72616f17.herokuapp.com',
+				target: 'http://localhost:3002',
 				changeOrigin: true,
 				ws: true
 			}

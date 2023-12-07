@@ -57,7 +57,7 @@ const {
 	mostrarPlan,
 	getChatMenu
 } = require('../controllers/router-menu');
-
+const {path, join} = require('path');
 const router = Router();
 
 //rutas get
@@ -68,8 +68,7 @@ router.get('/admin', [validarJWT, adminRol], adminGet);
 
 router.put('/admin/confirmar-pago', [validarJWT, adminRol], confimarPago);
 
-//rutas despues del pago
-router.get('/gracias', gracias);
+
 
 
 //mostrar usuario a confirmar
@@ -87,7 +86,7 @@ router.post('/validar-email-local',[
 
 
 //ruta get para crear administrador
-router.get('/admin-boss', loginAdminGet);
+
 router.post(
 	'/admin-boss',
 	[
@@ -183,7 +182,7 @@ router.post('/dashboard/newsubcategoria', [validarJWT], crearSubCategoria);
 
 //manejos de pedidos local
 
-router.get('/dashboard/pedidos', [validarJWT], mostrarPedidos);
+router.get('/dashboard/pedidos', mostrarPedidos);
 router.delete('/liberar-pedido', [validarJWT], liberarPedido);
 
 //chat local
@@ -198,5 +197,10 @@ router.get('/menu/subcategorias', mostrarsubCategoriasMenu);
 router.get('/menu/categorias', mostrarCategoriasMenu);
 router.get('/menu', mostrarPlan);
 router.get('/menu/chat', getChatMenu);
+
+// Configuraci贸n para manejar rutas espec铆ficas del cliente
+router.get(['/gracias', '/admin-boss', '/admin/*', '/dashboard/*', '/menulocal'], function (req, res) {
+	res.sendFile(join(__dirname, '../client/dist', 'index.html'));
+  });
 
 module.exports = router;

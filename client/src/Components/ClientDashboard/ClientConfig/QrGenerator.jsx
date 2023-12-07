@@ -95,6 +95,7 @@ export default function QrGenerator() {
 		<div>
 			<div className="qr-amount-container">
 				<form action="" onSubmit={handleSubmit} className="qr-amount-form">
+					<h3 className='titleqr'>Generador de QR</h3>
 					<div>
 						<input
 							type="number"

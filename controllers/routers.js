@@ -561,8 +561,8 @@ const recuperarClave = async (req, res) => {
 //actualizar clave
 
 const newPassword = async (req, res) => {
-	const email= req.email;
-	const { password } = req.body;
+	// const email= req.email;
+	const { password, email } = req.body;
 
 	const query = 'UPDATE usuarios SET password = ? WHERE email = ?';
 

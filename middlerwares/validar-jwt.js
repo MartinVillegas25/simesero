@@ -17,7 +17,13 @@ const logout = (req, res) => {
 };
 
 const validarJWT = async (req, res = response, next) => {
+	
+	console.log(req.headers);
 	const token = req.header('x-token');
+	console.log(token);
+	if (!token) {
+		return res.status(401).redirect('/');
+	}
 
 	const tokenListaNegra = req.header('x-token').split(' ')[1];
 
@@ -28,6 +34,24 @@ const validarJWT = async (req, res = response, next) => {
 			.json({ message: 'Token revoked. Please log in again.' });
 	}
 
+	try {
+		const { email } = jwt.verify(token, process.env.SECRETORPUBLIC_KEY);
+		console.log(email);
+		req.email = email;
+
+		next();
+	} catch (error) {
+		console.error(error);
+		res.status(401).redirect('/');
+		console.error('token no valido');
+	}
+
+	console.log(token);
+};
+
+const validarJWTPassword = async (req, res = response, next) => {
+	const token = req.query;
+	console.log(token);
 	if (!token) {
 		return res.status(401).redirect('/');
 	}
@@ -49,5 +73,6 @@ const validarJWT = async (req, res = response, next) => {
 
 module.exports = {
 	validarJWT,
-	logout
+	logout,
+	validarJWTPassword
 };
