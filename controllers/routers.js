@@ -424,7 +424,7 @@ const dashboardLocal = async (req, res) => {
 	const query = 'SELECT * FROM usuarios WHERE email = ?';
 
 	try {
-		const result = await pool.query(query, [email]);
+		const result = await pool.query(query, [emailQuery]);
 		if (result.length === 0) {
 			return res.status(404).json({ message: 'Usuario no encontrado' });
 		} else {
@@ -530,27 +530,38 @@ const activarCuenta = async (req, res) => {
 //mandar mail para recuperar clave
 const recuperarClave = async (req, res) => {
 	const { email } = req.body;
-	
+	console.log(email);
 
 	const query = 'SELECT * FROM usuarios WHERE email = ?';
+	const queryAdmin = 'SELECT * FROM administradores WHERE email = ?'
 
 	try {
 		const emailRecuperar = await pool.query(query, [email]);
-		const mail = emailRecuperar[0][0];
-		const correo = mail.email;
-		console.log(correo);
-		if (emailRecuperar.length === 0) {
+		const emailRecuperarAdmin = await pool.query(queryAdmin, [email]);
+		console.log(emailRecuperar[0])
+		console.log(emailRecuperarAdmin[0])
+		if (emailRecuperar[0].length === 0 && emailRecuperarAdmin[0].length === 0) {
 			return res
 				.status(404)
 				.json({ message: 'Correo electrónico no encontrado.' });
 		}
+		if(emailRecuperar[0].length === 0 && emailRecuperarAdmin[0].length > 0){
+			const mail = emailRecuperarAdmin[0][0];
+			correo = mail.email;	
+		}
+		if(emailRecuperar[0].length > 0 && emailRecuperarAdmin[0].length === 0){
+			const mail = emailRecuperar[0][0];
+			correo = mail.email;
+		}
+		console.log(correo);
 		//generar token
 		const token = await generarJWTPassword(correo);
 
 		nuevaPassword(token, correo);
 		res.status(200).json({
 			message:
-				' Se ha enviado una emails con los pasos seguir para actualizar la clave'
+				' Se ha enviado una emails con los pasos seguir para actualizar la clave',
+				token,
 		});
 	} catch (error) {
 		console.log(error);
@@ -561,22 +572,38 @@ const recuperarClave = async (req, res) => {
 //actualizar clave
 
 const newPassword = async (req, res) => {
-	// const email= req.email;
-	const { password, email } = req.body;
+	const email= req.email;
+	let { password } = req.body;
+	console.log(email, password);
 
-	const query = 'UPDATE usuarios SET password = ? WHERE email = ?';
+	//encriptar clave
+	const salt = bcrypt.genSaltSync();
+	password = bcrypt.hashSync(password, salt);
+
+	//validar desde donde viene los usuarios
+	const queryValidarUsuario = 'SELECT * FROM usuarios WHERE email = ?';
+	const queryValidarAdmin = 'SELECT * FROM administradores WHERE email = ?'
+	const queryUsuario = 'UPDATE usuarios SET password = ? WHERE email = ?';
+	const queryAdmin = 'UPDATE administradores SET password = ? WHERE email = ?';
 
 	try {
-		const result = await pool.query(query, [email, password]);
+		const usuarios = await pool.query(queryValidarUsuario, email);
+		const administradores = await pool.query(queryValidarAdmin, email);
 
-		if (result.length === 0) {
-			return res.status(404).json({ msg: 'Usuario no encontrado' });
-		} else {
-			res.status(200).json({ msg: 'ok' });
+		if (usuarios[0].length > 0) {
+			const result = await pool.query(queryUsuario, [password, email]);
+			console.log(result);
+			return res.status(200).json({ msg: 'ok Usuario' });
+		} 
+		if(administradores[0].length > 0){
+			const result = await pool.query(queryAdmin, [password, email]);
+			console.log(result);
+			 return res.status(200).json({ msg: 'ok Admin' });
 		}
+		res.status(404).json({ msg: 'Usuario no encontrado' });
 	} catch (error) {
 		console.log(error);
-		res.status(500).send('error en la suspencion de cuenta');
+		return res.status(500).send('error en cambio de password');
 	}
 };
 
@@ -811,7 +838,7 @@ const cambiarImagenLocal = async (req, res) => {
 };
 
 const getChatLocal = async (req, res) => {
-	const email = req.email;
+	const email = req.query.email;
 
 	const query1 = 'select pagoCambioPlan from Usuarios where email= ? ';
 	const query2 = 'select plan from Usuarios where email= ? ';

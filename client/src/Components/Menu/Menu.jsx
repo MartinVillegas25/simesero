@@ -1,11 +1,12 @@
 import './Menu.css';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
 import { IoRestaurantSharp } from 'react-icons/io5';
-import { FaShoppingCart } from 'react-icons/fa';
+import { GiHotMeal } from "react-icons/gi";
 import { BsFillChatDotsFill } from 'react-icons/bs';
-import { BsFillPersonFill } from 'react-icons/bs';
-import { BsCashCoin } from 'react-icons/bs';
-import { BsHouseDoorFill } from 'react-icons/bs';
+import { PiCallBell } from "react-icons/pi";
+import { TbReportMoney } from "react-icons/tb";
+import { MdFoodBank } from "react-icons/md";
+
 import Products from './Products/Products';
 import Cart from './Cart/Cart';
 import Call from './Call/Call';
@@ -73,14 +74,14 @@ export default function Menu() {
 						onClick={() => handleSectionClick('products')}
 						className={selectedSection === 'products' ? 'selected' : ''}
 					>
-						<BsHouseDoorFill className="footer-icon" />
+						<MdFoodBank className="footer-icon" />
 					</a>
 					<a
 						href="#cart"
 						onClick={() => handleSectionClick('cart')}
 						className={selectedSection === 'cart' ? 'selected' : ''}
 					>
-						<FaShoppingCart className="footer-icon" />
+						<GiHotMeal className="footer-icon" />
 					</a>
 					<a
 						href="#chat"
@@ -94,14 +95,14 @@ export default function Menu() {
 						onClick={() => handleSectionClick('call')}
 						className={selectedSection === 'call' ? 'selected' : ''}
 					>
-						<BsFillPersonFill className="footer-icon" />
+						<PiCallBell className="footer-icon" />
 					</a>
 					<a
 						href="#pay"
 						onClick={() => handleSectionClick('pay')}
 						className={selectedSection === 'pay' ? 'selected' : ''}
 					>
-						<BsCashCoin className="footer-icon" />
+						<TbReportMoney className="footer-icon" />
 					</a>
 				</div>
 			</footer>

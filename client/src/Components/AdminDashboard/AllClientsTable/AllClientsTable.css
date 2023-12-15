@@ -105,6 +105,21 @@ span.total-clients {
 	color: #000;
 }
 
+/*clientes */
+.act-table-body svg.check-icon path{
+    fill:green;
+}
+.act-table-body svg.X-icon path{
+    fill:red;
+}
+.act-table-body svg{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.nav-open{
+    height: 100vh;
+}
+
 @media screen and (max-width: 850px) {
 	.act-container {
 		margin-top: 20px;

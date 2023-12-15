@@ -113,7 +113,7 @@ export default function ClientsTableHome() {
 					</div>
 				)
 			) : (
-				<h1>Cargando...</h1>
+				<p>Cargando...</p>
 			)}
 		</main>
 	);

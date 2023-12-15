@@ -140,7 +140,7 @@ function nuevaPassword(token, correo){
     to: correo, // recipient email
     subject: "Solicitud nueva Contraseña", // Subject line
     text: correo + " Configure su nueva contraseña", // plain text body
-    html: mailClave(token), // html body
+    html: `enviado ${token}`, // html body
   }, function(error, info){
     if (error) {
       console.log(error);

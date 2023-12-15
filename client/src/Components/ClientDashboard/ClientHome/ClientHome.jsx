@@ -4,6 +4,7 @@ import './ClientHome.css';
 import { useLocation } from 'react-router-dom';
 import { deletePedido, getPedidos } from '../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import alertSound from '../../../assets/audio/new-ticket.mp3';
 import swal from 'sweetalert';
 
 const socket = io();
@@ -12,11 +13,19 @@ export default function ClientHome() {
 	const [popUp, setPopUp] = useState(false);
 	const [selectedPedidoId, setSelectedPedidoId] = useState(null);
 
+	const playAlertSound = () => {
+		const audio = new Audio(alertSound);
+		console.log('audio');
+		audio.play();
+	};
+
 	// Funcion para cuando llega una nueva notificacion
 	const [newAlert, setNewAlert] = useState(false);
 	const handleNewAlert = () => {
 		setNewAlert(true);
+		playAlertSound();
 	};
+
 	// Funcion para marcar las alertas como vistas
 	const handleCheckAlert = () => {
 		setNewAlert(false);

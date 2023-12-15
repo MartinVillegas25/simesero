@@ -23,6 +23,7 @@ CREATE TABLE usuarios (
   comentario varchar(200) NULL;
   pagoConfirmado boolean DEFAULT FALSE NULL;
   pagoCambioPlan boolean DEFAULT FALSE NULL ;
+  cantidad_pedidos INT NOT NULL DEFAULT 0;
   PRIMARY KEY (id)
 );
 
@@ -44,6 +45,7 @@ ADD tipo varchar(20) NOT NULL,
 ADD comentario varchar(200) NULL;
 ADD pagoConfirmado boolean DEFAULT FALSE NULL 
 ADD pagoCambioPlan boolean DEFAULT FALSE NULL 
+ADD cantidad_pedidos INT NOT NULL DEFAULT 0;
 
 CREATE TABLE planes (
   basic VARCHAR(20) NULL,

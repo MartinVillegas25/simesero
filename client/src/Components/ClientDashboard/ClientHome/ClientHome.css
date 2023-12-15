@@ -118,3 +118,13 @@ table {
 .popup-content {
 	/* Agrega estilos personalizados para el contenido del pop-up si es necesario */
 }
+@media only screen and (max-width:1000px){
+    .client-home-table-container{
+        overflow-x: scroll;
+    }
+}
+@media only screen and (max-width:768px){
+    .client-home{
+        display: block;
+    }
+}

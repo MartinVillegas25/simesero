@@ -68,7 +68,9 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
-
+button:hover, a:hover{
+	cursor: pointer;
+}
 body {
 	margin: 0;
 	/* display: flex; */

@@ -245,7 +245,7 @@ export default function AdminConfig() {
 					</main>
 				)
 			) : (
-				<h1>Cargando...</h1>
+				<p>Cargando...</p>
 			)}
 		</div>
 	);

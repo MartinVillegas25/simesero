@@ -50,12 +50,7 @@ const validarJWT = async (req, res = response, next) => {
 };
 
 const validarJWTPassword = async (req, res = response, next) => {
-	const token = req.query;
-	console.log(token);
-	if (!token) {
-		return res.status(401).redirect('/');
-	}
-
+	const token = req.query.token;
 	try {
 		const { email } = jwt.verify(token, process.env.SECRETORPUBLIC_KEY);
 		console.log(email);

@@ -143,6 +143,7 @@ export default function AllClientsTable() {
 										<th>Fecha de alta</th>
 										<th>Plan</th>
 										<th>Estado</th>
+										<th>Pedidos Mensuales</th>
 										<th>Pago</th>
 										<th>Cambio Plan</th>
 										<th>Mensaje</th>
@@ -166,6 +167,8 @@ export default function AllClientsTable() {
 														<BsXCircle className="X-icon" />
 													</td>
 												)}
+												<td>{c.cantidad_pedidos}</td>
+
 												{c.pagoConfirmado === 1 ? <td>SI</td> : <td>NO</td>}
 												{c.pagoCambioPlan === 1 ? <td>SI</td> : <td>NO</td>}
 												<td>
@@ -214,7 +217,7 @@ export default function AllClientsTable() {
 					</main>
 				)
 			) : (
-				<h1>Cargando...</h1>
+				<p>Cargando...</p>
 			)}
 		</div>
 	);

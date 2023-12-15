@@ -3,14 +3,18 @@ import './LoginModal.css';
 import img from '../../../assets/CAMARERA.webp';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { logUser, validateAdmin, validateUser } from '../../../redux/actions';
+import {
+	logUser,
+	validateAdmin,
+	validateUser,
+	passwordEmail
+} from '../../../redux/actions';
 import { Link } from 'react-router-dom';
 
 export default function LoginModal({ handleCloseLogin, handleOpenSuscribe }) {
 	const dispatch = useDispatch();
 	const token = useSelector((state) => state.token);
 	const userType = useSelector((state) => state.userType);
-	console.log(userType);
 	const actualUser = useSelector((state) => state.actualUser);
 
 	const [input, setInput] = useState({
@@ -84,10 +88,18 @@ export default function LoginModal({ handleCloseLogin, handleOpenSuscribe }) {
 				dispatch(validateAdmin());
 			} else if (userType === 'local') {
 				localStorage.setItem('token', token);
-				dispatch(validateUser());
+				dispatch(validateUser(actualUser.email));
 			}
 		}
 	}, [token]);
+
+	const handleEmailPassword = () => {
+		if (input.email === '') {
+			alert('debe ingresar el email');
+			return;
+		}
+		dispatch(passwordEmail({ email: input.email }));
+	};
 
 	return (
 		<div className="login">
@@ -150,7 +162,9 @@ export default function LoginModal({ handleCloseLogin, handleOpenSuscribe }) {
 							/>{' '}
 							<p>Recordarme</p>
 						</div>
-						<a href="">Olvidaste la contraseña?</a>
+						<button className='login-btn' onClick={handleEmailPassword}>
+							Olvidaste la contraseña?
+						</button>
 					</div>
 					{userType === 'local' ? (
 						<Link to={`/dashboard?email=${actualUser.email}`}>
@@ -168,7 +182,7 @@ export default function LoginModal({ handleCloseLogin, handleOpenSuscribe }) {
 
 					<div className="login-to-register">
 						<p>No tienes una cuenta?</p>
-						<button href="" onClick={openSuscribe}>
+						<button className='login-btn' onClick={openSuscribe}>
 							Registrate
 						</button>
 					</div>

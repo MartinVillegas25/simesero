@@ -566,6 +566,8 @@ const realizarPedidos = async (req, res) => {
 	const query =
 		'INSERT INTO pedidos (mesa,pedido, comentarios, nombre, total, usuario_email) VALUES (?, ?, ?, ?, ?, ?)';
 
+	const queryPedidos = `UPDATE usuarios SET cantidad_pedidos = cantidad_pedidos + 1 WHERE email = ?`;
+
 	try {
 		const result = await pool.query(query, [
 			mesa,
@@ -575,6 +577,7 @@ const realizarPedidos = async (req, res) => {
 			total,
 			email
 		]);
+		const resultPedidos = await pool.query(queryPedidos, [email]);
 		res.status(200).json({
 			msg: 'pedido realizado con exito',
 			pedidos: result[0][0]

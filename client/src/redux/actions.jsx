@@ -5,6 +5,8 @@ import axios from 'axios';
 export const CREATE_USER = 'CREATE_USER';
 export const LOG_USER = 'LOG_USER';
 export const GET_ALL_CLIENTS = 'GET_ALL_CLIENTS';
+export const PASSWORD_EMAIL = 'PASSWORD_EMAIL';
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const SUSPEND_USER = 'SUSPEND_USER';
 export const ACTIVATE_USER = 'ACTIVATE_USER';
 export const VALIDATE_ADMIN = 'VALIDATE_ADMIN';
@@ -296,7 +298,7 @@ export function validateAdmin() {
 			const headers = {
 				'x-token': token
 			};
-			axios.get(`${url}/admin`, { headers }).then((response) => {
+			axios.get(`${url}/administrador`, { headers }).then((response) => {
 				return dispatch({
 					type: VALIDATE_ADMIN,
 					payload: response.data
@@ -309,16 +311,16 @@ export function validateAdmin() {
 }
 
 //funcion para validar el ingreso de un usuario no admin
-export function validateUser() {
+export function validateUser(email) {
 	return async function (dispatch) {
 		try {
 			const token = localStorage.getItem('token'); // Obtén el token almacenado en localStorage
-			
+
 			const headers = {
 				'x-token': token
 			};
 			axios
-				.get(`${url}/dashboard`, { headers })
+				.get(`${url}/client?email=${email}`, { headers })
 				.then((response) => {
 					return dispatch({
 						type: VALIDATE_USER,
@@ -843,6 +845,48 @@ export function getPlanToMenu(email) {
 				.then((response) => {
 					return dispatch({
 						type: GET_PLAN_TO_MENU,
+						payload: response.data
+					});
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+// Funcion para enviar el mail de cambio de contraseña
+export function passwordEmail(payload) {
+	return async function (dispatch) {
+		console.log(payload);
+		try {
+			axios
+				.post(`${url}/save-password`, payload)
+				.then((response) => {
+					alert(
+						`Se ha enviado un email a ${payload.email} con los pasos a seguir `
+					);
+					return dispatch({
+						type: PASSWORD_EMAIL,
+						payload: response.data
+					});
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+// funcion para cambiar la contraseña
+// el token llega por query con el nombre token
+
+export function changePassword(token, payload) {
+	return async function (dispatch) {
+		try {
+			axios
+				.put(`${url}/new-password?token=${token}`, payload)
+				.then((response) => {
+					return dispatch({
+						type: CHANGE_PASSWORD,
 						payload: response.data
 					});
 				});

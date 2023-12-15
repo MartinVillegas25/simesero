@@ -72,6 +72,9 @@
 .client-menu-mobile {
 	display: none;
 }
+.admin-menu-mobile {
+	display: none;
+}
 
 .sideMenuClosed {
 	width: 60px;
@@ -125,7 +128,9 @@
 	.client-side-menu-web {
 		display: none;
 	}
-
+	.admin-side-menu-web {
+		display: none;
+	}
 	.client-menu-mobile {
 		display: block;
 		position: fixed;

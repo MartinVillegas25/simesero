@@ -44,7 +44,7 @@
 .clients-table-container {
 	height: 493px;
 	flex-shrink: 0;
-	overflow-y: hidden;
+	overflow-y: scroll;
 	overflow-x: hidden;
 	overflow-wrap: normal;
 	padding-right: 20px;
@@ -157,6 +157,13 @@
 *::-webkit-scrollbar-thumb:active {
 	background-color: #d9a700;
 }
+
+
+/*admin dashboard */
+/* .admin-dashboard{
+    height: 100vh;
+} */
+
 
 @media screen and (max-width: 850px) {
 	.admin-clients-table {

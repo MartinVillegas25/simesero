@@ -34,7 +34,7 @@ const {
 
 const { check } = require('express-validator');
 
-const { validarJWT, logout } = require('../middlerwares/validar-jwt');
+const { validarJWT, logout, validarJWTPassword } = require('../middlerwares/validar-jwt');
 const adminRol = require('../middlerwares/validad-roles');
 
 //controllers y middlerwares del menu
@@ -63,8 +63,8 @@ const router = Router();
 //rutas get
 router.get('/', homeGet);
 router.get('/dashboard/config', [validarJWT], configGet);
-router.get('/dashboard', [validarJWT], dashboardLocal);
-router.get('/admin', [validarJWT, adminRol], adminGet);
+router.get('/client',[validarJWT], dashboardLocal);
+router.get('/administrador', [validarJWT, adminRol], adminGet);
 
 router.put('/admin/confirmar-pago', [validarJWT, adminRol], confimarPago);
 
@@ -132,7 +132,7 @@ router.post(
 
 //ruta actualizacion clave
 router.post('/save-password', recuperarClave);
-router.put('/new-password',[validarJWT], newPassword);
+router.put('/new-password',[validarJWTPassword], newPassword);
 //actualizacion de datos
 router.put('/actualizar', [validarJWT], actualizarDatos);
 
@@ -186,10 +186,13 @@ router.get('/dashboard/pedidos', mostrarPedidos);
 router.delete('/liberar-pedido', [validarJWT], liberarPedido);
 
 //chat local
-router.get('/dashboard/chat', [validarJWT], getChatLocal);
+router.get('/client/chat', getChatLocal);
 
 //cancerlar cuenta
 router.get('/dashboard/cancelar', [validarJWT], cancelarPlan);
+
+
+
 
 //****************RUTAS DEL MENU******************
 router.post('/pedido', realizarPedidos);
@@ -199,7 +202,7 @@ router.get('/menu', mostrarPlan);
 router.get('/menu/chat', getChatMenu);
 
 // Configuraci贸n para manejar rutas espec铆ficas del cliente
-router.get(['/gracias', '/admin-boss', '/admin/*', '/dashboard/*', '/menulocal'], function (req, res) {
+router.get(['*'], function (req, res) {
 	res.sendFile(join(__dirname, '../client/dist', 'index.html'));
   });
 

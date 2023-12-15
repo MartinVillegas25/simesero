@@ -86,9 +86,12 @@ class TicketControl {
 
     // Nuevo método para solicitar atención de la camarera
     llamarCamerera(email, mesa) {
-        
+        const horaActual = new Date();
+        const hora = horaActual.getHours();
+        const minutos = horaActual.getMinutes(); 
+
         const ticket = this.mesas.shift(); // this.tickets[0];
-        ticket.mesa = 'Camarera Mesa ' + mesa;
+        ticket.mesa = hora + ':' + minutos + ' Camarera Mesa ' + mesa;
         
         this.agregarEventoSala(email, ticket.mesa);
 
@@ -122,8 +125,11 @@ class TicketControl {
         // }
 
         // this.agregarEventoSala(email, ticket.mesa);
+        const horaActual = new Date();
+        const hora = horaActual.getHours();
+        const minutos = horaActual.getMinutes(); 
         const ticket = this.mesas.shift();
-        ticket.mesa = `Cuenta en mesa ${mesa} \n ${nombre}, ${metodo}`;
+        ticket.mesa = `${hora}:${minutos} Cuenta en mesa ${mesa} \n ${nombre}, ${metodo}`;
 
         this.agregarEventoSala(email, ticket.mesa);
 
