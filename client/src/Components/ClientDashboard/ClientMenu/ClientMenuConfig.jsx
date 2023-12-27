@@ -1,142 +1,249 @@
 import { useState, useEffect } from 'react';
-import QRcode from 'react-qr-code';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	deleteProduct,
+	getMenuCategories,
+	getProducts,
+	modifyProduct
+} from '../../../redux/actions';
+import queryString from 'query-string';
+import './ClientMenuConfig.css';
+import swal from 'sweetalert';
 
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-import { useLocation } from 'react-router-dom';
-
-export default function QrGenerator() {
-	const location = useLocation();
-	const searchParams = new URLSearchParams(location.search);
-	const email = searchParams.get('email');
-	const [totalCodes, setTotalCodes] = useState(0);
-	const [firstCode, setFirstCode] = useState(0);
-	const [generate, setGenerate] = useState(false);
-	const [qrCodes, setQrCodes] = useState([]);
+export default function ClientMenuConfig() {
+	const dispatch = useDispatch();
+	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [selectedProductForEdit, setSelectedProductForEdit] = useState({});
 
 	useEffect(() => {
-		setQrCodes(generateQRs());
-	}, [totalCodes, firstCode]);
+		const url = window.location.href;
+		const parsed = queryString.parseUrl(url);
+		const email = parsed.query.email;
+		dispatch(getMenuCategories(email));
+		dispatch(getProducts(email));
+	}, []);
+	const products = useSelector((state) => state.localProducts);
 
-	const generateQRs = () => {
-		const codes = [];
-		for (
-			let i = parseInt(firstCode, 10);
-			i < parseInt(firstCode, 10) + parseInt(totalCodes, 10);
-			i++
-		) {
-			codes.push(`https://simesero.com/menulocal?email=${email}&mesa=${i}`);
-		}
-		return codes;
+	const categories = useSelector((state) => state.menuCategories.categorias);
+
+	const handleCategorySelection = (categoryName) => {
+		setSelectedCategory(categoryName);
 	};
 
-	const handleChangeFirstCode = (e) => {
-		setFirstCode(e.target.value);
+	const handleShowAll = () => {
+		setSelectedCategory(null);
 	};
 
-	const handleChangeTotalCodes = (e) => {
-		setTotalCodes(e.target.value);
-	};
-
-	const handleSubmit = (e) => {
+	const handleDeleteProduct = (e) => {
 		e.preventDefault();
-		setGenerate(true);
+		swal({
+			title: 'Eliminar',
+			text: 'Desea eliminar este producto?',
+			icon: 'warning',
+			buttons: ['No', 'Si']
+		}).then((respuesta) => {
+			if (respuesta) {
+				dispatch(deleteProduct(e.target.value));
+				swal({
+					text: `Se ha eliminado el producto`,
+					icon: 'success'
+				});
+				setTimeout(function () {
+					window.location.reload(true);
+				}, 2000);
+			} else {
+				swal({ text: 'No se ha eliminado el producto', icon: 'info' });
+			}
+		});
 	};
 
-	const handleDownloadPDF = () => {
-		const qrCodeContainer = document.getElementById('qrCodeContainer');
-		const qrCodesToPrint = qrCodeContainer.getElementsByClassName('qrCode');
+	const handleEditPopUp = (product) => {
+		setSelectedProductForEdit(product);
 
-		const pdf = new jsPDF('landscape', 'mm', 'a4');
-		const qrCodeWidth = 70;
-		const qrCodeHeight = 80;
-		const columnSpacing = 0;
-		const rowSpacing = 0;
+		setInput({
+			nombre: product.nombre || '', // Agrega el valor del nombre del producto
+			precio: product.precio || 0, // Agrega el valor del precio del producto
+			img: product.img || null
+		});
+	};
 
-		let codesPrinted = 0;
+	const [input, setInput] = useState({
+		nombre: '',
+		precio: 0,
+		img: null // Use null initially
+	});
 
-		for (let i = 0; i < qrCodesToPrint.length; i++) {
-			const qrCode = qrCodesToPrint[i];
+	const handleChangeImg = (e) => {
+		setInput({ ...input, img: e.target.files[0] });
+	};
 
-			html2canvas(qrCode).then((canvas) => {
-				const imgData = canvas.toDataURL('image/png');
+	const handleChangeProduct = (e) => {
+		setInput((prevInput) => ({
+			...prevInput,
+			[e.target.name]: e.target.value
+		}));
+	};
 
-				if (codesPrinted % 8 === 0) {
-					if (codesPrinted !== 0) {
-						pdf.addPage(); // Agrega una nueva página cada 8 códigos (4x2)
-					}
-				}
+	const handleSubmitChanges = (e) => {
+		e.preventDefault();
+		swal({
+			title: 'Modificar',
+			text: 'Desea modificar este producto?',
+			icon: 'warning',
+			buttons: ['No', 'Si']
+		}).then((respuesta) => {
+			if (respuesta) {
+				const formData = new FormData();
+				formData.append('nombre', input.nombre);
+				formData.append('precio', input.precio);
+				formData.append('img', input.img); // You can append the image to the FormData
 
-				const columnIndex = codesPrinted % 4;
-				const rowIndex = Math.floor((codesPrinted % 8) / 4);
-
-				const xPosition = columnIndex * (qrCodeWidth + columnSpacing);
-				const yPosition = rowIndex * (qrCodeHeight + rowSpacing);
-
-				pdf.addImage(
-					imgData,
-					'PNG',
-					xPosition,
-					yPosition,
-					qrCodeWidth,
-					qrCodeHeight
-				);
-
-				codesPrinted++;
-
-				if (i === qrCodesToPrint.length - 1) {
-					pdf.save('codigos_qr.pdf');
-				}
-			});
-		}
+				dispatch(modifyProduct(selectedProductForEdit.id, formData));
+				swal({
+					text: `Se ha modificado el producto`,
+					icon: 'success'
+				});
+				setTimeout(function () {
+					window.location.reload(true);
+				}, 2000);
+			} else {
+				swal({ text: 'No se ha modificado el producto', icon: 'info' });
+			}
+		});
 	};
 
 	return (
-		<div>
-			<div className="qr-amount-container">
-				<form action="" onSubmit={handleSubmit} className="qr-amount-form">
-					<div>
-						<input
-							type="number"
-							placeholder="Cantidad de codigos a imprimir"
-							onChange={handleChangeTotalCodes}
-							max={15}
-						/>
-						<input
-							type="number"
-							placeholder="Numero de inicio"
-							onChange={handleChangeFirstCode}
-							max={15}
-						/>
-					</div>
-					<button className="generate-qr-btn">Generar códigos</button>
-					{generate && (
-						<button onClick={handleDownloadPDF} className="generate-qr-btn">
-							Descargar PDF
-						</button>
-					)}
-				</form>
-				<a
-					href={`https://simesero.com/dashboard/configuracion?email=${email}`}
+		<main className="products-container">
+			<div className="menu-config-admin-categories">
+				<button
+					className={`menu-config-admin-btn ${
+						selectedCategory === null ? 'selected-category' : ''
+					}`}
+					onClick={handleShowAll}
 				>
-					Volver al dashboard
-				</a>
+					Todas
+				</button>
+				{categories?.map((c, index) => (
+					<button
+						className={`menu-config-admin-btn ${
+							selectedCategory === c.nombre_categoria ? 'selected-category' : ''
+						}`}
+						key={c.nombre_categoria + index}
+						onClick={() => handleCategorySelection(c.nombre_categoria)}
+					>
+						{c.nombre_categoria}
+					</button>
+				))}
 			</div>
 			<div>
-				{generate && (
-					<div className="qr-code-container" id="qrCodeContainer">
-						{qrCodes.map((url, index) => (
-							<div key={url} className="qrCode">
-								<div>
-									<p>Mesa: {index + 1}</p>
-									<QRcode value={url} className="qr" />
-								</div>
-								{index % 2 !== 0 && <div className="clear-float"></div>}
-							</div>
-						))}
-					</div>
+				{products === undefined ? (
+					<h3>Cargando</h3>
+				) : (
+					products?.map((categoria, index) => (
+						<div key={categoria.categoria + index}>
+							{selectedCategory === null ||
+							selectedCategory === categoria.categoria ? (
+								<>
+									<h2 className="category-title">{categoria.categoria}</h2>
+									{categoria.subcategorias.map((subcategoria, subIndex) => (
+										<div key={subcategoria.subcategoria_id + subIndex}>
+											<h2 className="subcategory-title">
+												{subcategoria.subcategoria}
+											</h2>
+											<ul className="products-list">
+												{subcategoria.productos.map((producto, prodIndex) => (
+													<li
+														className="client-menu-product-container"
+														key={prodIndex}
+													>
+														<div>
+															<div className="product-list-display">
+																<div>
+																	<img
+																		src={producto.img}
+																		alt={producto.nombre}
+																		className="product-img"
+																	/>
+																</div>
+																<div className="product-info">
+																	<p className="product-name">
+																		{producto.nombre}
+																	</p>
+																	<p className="product-price">
+																		Precio: ${producto.precio}
+																	</p>
+																</div>
+																<div className="admin-product-btn-container">
+																	<button
+																		value={producto.id}
+																		onClick={handleDeleteProduct}
+																		className="admin-product-btn"
+																	>
+																		Eliminar
+																	</button>
+																	<button
+																		onClick={() => handleEditPopUp(producto)}
+																		className="admin-product-btn"
+																	>
+																		Editar
+																	</button>
+																</div>
+															</div>
+															{selectedProductForEdit === producto ? (
+																<div className="product-edit-popup">
+																	<form
+																		action=""
+																		onChange={handleChangeProduct}
+																	>
+																		<label htmlFor="">Nombre:</label>
+																		<input
+																			type="text"
+																			name="nombre"
+																			id=""
+																			value={input.nombre}
+																		/>
+																		<label htmlFor="">Precio:</label>
+																		<input
+																			type="number"
+																			name="precio"
+																			id=""
+																			value={input.precio}
+																		/>
+																		<label htmlFor="">Imagen:</label>
+																		<input
+																			type="file"
+																			id="newImg"
+																			accept="img/*"
+																			onChange={handleChangeImg}
+																		/>
+																		<button
+																			type="submit"
+																			onClick={handleSubmitChanges}
+																		>
+																			Realizar cambios
+																		</button>
+																	</form>
+																	<button
+																		onClick={() =>
+																			setSelectedProductForEdit(null)
+																		}
+																	>
+																		Cerrar
+																	</button>
+																</div>
+															) : null}
+														</div>
+													</li>
+												))}
+											</ul>
+										</div>
+									))}
+								</>
+							) : null}
+						</div>
+					))
 				)}
 			</div>
-		</div>
+		</main>
 	);
 }

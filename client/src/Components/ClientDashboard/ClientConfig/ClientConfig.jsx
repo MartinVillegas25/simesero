@@ -331,7 +331,7 @@ export default function ClientConfig() {
 				<p>Basico: Gratuito</p>
 				<p>Estandar: ${plans.standard}</p>
 				<p>Premuim: ${plans.premium}</p>
-				<a className="navbar-link" href="mailto:">Sugerencias</a>
+				<a className="navbar-link" href="mailto:contacto@simesero.com">Sugerencias</a>
 			</div>
 		</main>
 	);

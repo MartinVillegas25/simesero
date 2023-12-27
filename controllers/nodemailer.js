@@ -6,6 +6,10 @@ const confirmarPlanEmail = require('../templateEmail/confirmarPlanEmail');
 const nuevoValoresEmail = require('../templateEmail/nuevoplanEmail');
 const cancelarSuscripcion = require('../templateEmail/CancerlarPlan');
 
+// const  {Resend}  = require('resend') ;
+
+// const resendConfig = new Resend('re_925XzR87_Gf68xaof6XwEHmhcWMR8gZyo');
+
 
 
 // const createTrans = ()=>{
@@ -67,13 +71,27 @@ function sendEmail (correo){
 
 }
 
+
+// function confirmarPago(correo){
+//   console.log('enviado')
+//   resendConfig.emails.send({
+//   from: 'martinvillegas90@hotmail.com',
+//   to: correo,
+//   subject: 'Su pago a sido confirmado',
+//   html: '<p>Gracias por confiar en Simesero <br><strong>Su pago a sido confirmado correctamente</strong>!</p>'
+// })
+// };
 function confirmarPago(correo){
     transporter.sendMail({
       from: "martinvillegas90@hotmail.com", // verified sender email
       to: correo, // recipient email
       subject: "Confirmacion de suscripcion", // Subject line
       text: "Equipo de Si Mesero", // plain text body
-      html: confirmar, // html body
+      html: `Bienvenido a SiMesero <br>
+            Su pago a sido confirmado correctamente, <br><strong>Disfrute de Nuestra Web</strong> <br>
+            <a style="color:orange; text-decoration:none;" href="https://simesero.com">Dashboard</a>
+      
+      `, // html body
     }, function(error, info){
       if (error) {
         console.log(error);
@@ -89,7 +107,11 @@ function confirmarPlan(correo){
     to: correo, // recipient email
     subject: "Confirmacion cambio de plan", // Subject line
     text: "Equipo de Si Mesero", // plain text body
-    html: confirmarPlanEmail, // html body
+    html: `Bienvenido a SiMesero <br>
+    Su pago a sido confirmado correctamente, <br><strong>Empiece a disfrutar de su plan actualizado</strong> <br>
+    <a style="color:orange; text-decoration:none;" href="https://simesero.com">Dashboard</a>
+
+`, // html body
   }, function(error, info){
     if (error) {
       console.log(error);
@@ -100,22 +122,22 @@ function confirmarPlan(correo){
   });
 }
 
-function nuevoValoresCorreo(correo, standard, premium){
-  transporter.sendMail({
-    from: "martinvillegas90@hotmail.com", // verified sender email
-    to: correo, // recipient email
-    subject: "Nuevos Valores de Suscripcion", // Subject line
-    text: "Equipo de Si Mesero", // plain text body
-    html: nuevoValoresEmail(standard, premium), // html body
-  }, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
+// function nuevoValoresCorreo(correo, standard, premium){
+//   transporter.sendMail({
+//     from: "martinvillegas90@hotmail.com", // verified sender email
+//     to: correo, // recipient email
+//     subject: "Nuevos Valores de Suscripcion", // Subject line
+//     text: "Equipo de Si Mesero", // plain text body
+//     html: nuevoValoresEmail(standard, premium), // html body
+//   }, function(error, info){
+//     if (error) {
+//       console.log(error);
+//     } else {
       
-      console.log('Email sent: ' + info.response);
-    }
-  });
-}
+//       console.log('Email sent: ' + info.response);
+//     }
+//   });
+// }
 
 function cancelarsuscripcion(correo){
   transporter.sendMail({
@@ -123,7 +145,11 @@ function cancelarsuscripcion(correo){
     to: correo, // recipient email
     subject: "Cancelacion de suscripcion", // Subject line
     text: correo + "quiere cancelar la suscripcion", // plain text body
-    html: cancelarSuscripcion(correo), // html body
+    html: `Bienvenido a SiMesero <br>
+    Su solicitud de cancelacion de servicio fue registrada, el mismo quedara sin efecto a partir del proximo mes <br><strong>Nos da lastima perderlo como miembro</strong> <br>
+    <a style="color:orange; text-decoration:none;" href="https://simesero.com">Sugerencias</a>
+
+`, // html body
   }, function(error, info){
     if (error) {
       console.log(error);
@@ -140,7 +166,11 @@ function nuevaPassword(token, correo){
     to: correo, // recipient email
     subject: "Solicitud nueva Contraseña", // Subject line
     text: correo + " Configure su nueva contraseña", // plain text body
-    html: `enviado ${token}`, // html body
+    html:  `Bienvenido a SiMesero <br>
+    Su solicitud de cambio de clave fue registrado, ingrese al siguiente link para actualizarla <br><strong>Este link tiene una validez de 30 min</strong> <br>
+    <a style="color:orange; text-decoration:none;" href="https://simesero.com/newpassword?token=${token}">Actualizar Password</a>
+
+`, // html body
   }, function(error, info){
     if (error) {
       console.log(error);
@@ -156,7 +186,7 @@ module.exports = {
   sendEmail,
   confirmarPago,
   confirmarPlan,
-  nuevoValoresCorreo,
+  // nuevoValoresCorreo,
   cancelarsuscripcion,
   nuevaPassword
 }

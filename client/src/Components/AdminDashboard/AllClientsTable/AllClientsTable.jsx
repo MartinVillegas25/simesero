@@ -5,6 +5,7 @@ import { VscMail } from 'react-icons/vsc';
 // import grafico from '../../../assets/grTorta.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { CiSearch } from 'react-icons/ci';
 
 import {
 	activateUser,
@@ -23,6 +24,21 @@ export default function AllClientsTable() {
 	const emailAddresses = allUsers.map((user) => user.email).join(';');
 
 	const [pageLoaded, setPageLoaded] = useState(false);
+
+	const [clientEmail, setClientEmail] = useState('');
+	const handleChange = (e) => {
+		setClientEmail(e.target.value);
+	};
+	const searchClient = () => {
+		if (!clientEmail) return [];
+		const localClients = allUsers.filter((client) =>
+			client.email.toLowerCase().includes(clientEmail.toLowerCase())
+		);
+
+		return localClients;
+	};
+
+	const searchedClients = searchClient();
 	const handleSubmitSuspend = (e) => {
 		e.preventDefault();
 		swal({
@@ -94,11 +110,7 @@ export default function AllClientsTable() {
 					<h1> Usted no tiene acceso</h1>
 				) : (
 					<main className="act-container">
-						{/* <div className="act-graf">
-								<img src={grafico} alt="" className="graf" />
-							</div> */}
-
-						<h2>
+							<h2>
 							TOTAL CLIENTES
 							<span className="total-clients">
 								{' '}
@@ -106,6 +118,20 @@ export default function AllClientsTable() {
 								{allUsers?.length}
 							</span>
 						</h2>
+						<div className='buscar'>
+							<button>
+								<CiSearch />
+							</button>
+							<input
+								value={clientEmail}
+								onChange={handleChange}
+								type="text"
+								placeholder="Buscar un cliente"
+								className='input-buscar'
+							></input>
+						</div>
+
+					
 
 						<div className="act-table-container">
 							<div className="act-title">
@@ -137,7 +163,7 @@ export default function AllClientsTable() {
 								</div>
 							</div>
 							<table className="act-table">
-								<thead className="">
+								<thead className="admin-tabla-usuarios">
 									<tr>
 										<th>Nombre</th>
 										<th>Fecha de alta</th>
@@ -152,55 +178,119 @@ export default function AllClientsTable() {
 									</tr>
 								</thead>
 								<tbody className="act-table-body">
-									{allUsers?.map((c) => {
-										return (
-											<tr key={c.id}>
-												<td>{c.storeName}</td>
-												<td>{c.date}</td>
-												<td>{c.plan}</td>
-												{c.status === 1 ? (
-													<td>
-														<BsCheckCircle className="check-icon" />
-													</td>
-												) : (
-													<td>
-														<BsXCircle className="X-icon" />
-													</td>
-												)}
-												<td>{c.cantidad_pedidos}</td>
-
-												{c.pagoConfirmado === 1 ? <td>SI</td> : <td>NO</td>}
-												{c.pagoCambioPlan === 1 ? <td>SI</td> : <td>NO</td>}
-												<td>
-													<a
-														href={`mailto:${c.email}`}
-														target="_blank"
-														rel="noreferrer"
-													>
-														<VscMail className="mail-icon" />
-													</a>
-												</td>
-												<td>
-													<button
-														value={c.email}
-														onClick={handleSubmitActivate}
-														className="status-btn-activate"
-													>
-														Activar
-													</button>
-												</td>
-												<td>
-													<button
-														value={c.email}
-														onClick={handleSubmitSuspend}
-														className="status-btn-suspend"
-													>
-														Suspender
-													</button>
-												</td>
-											</tr>
-										);
-									})}
+									{clientEmail !== '' ? (
+										<>
+											{searchedClients?.map((c) => {
+												return (
+													<tr key={c.id}>
+														<td>{c.storeName}</td>
+														<td>{c.date}</td>
+														<td>{c.plan}</td>
+														{c.status === 1 ? (
+															<td>
+																<BsCheckCircle className="check-icon" />
+															</td>
+														) : (
+															<td>
+																<BsXCircle className="X-icon" />
+															</td>
+														)}
+														<td>{c.cantidad_pedidos}</td>
+														{c.pagoConfirmado === 1 ? <td>SI</td> : <td>NO</td>}
+														{c.pagoCambioPlan === 1 ? <td>SI</td> : <td>NO</td>}
+														<td>
+															<a
+																href={`mailto:${c.email}`}
+																target="_blank"
+																rel="noreferrer"
+															>
+																<VscMail className="mail-icon" />
+															</a>
+														</td>
+														<td>
+															<button
+																value={c.email}
+																onClick={handleSubmitActivate}
+																className="status-btn-activate"
+															>
+																Activar
+															</button>
+														</td>
+														<td>
+															<button
+																value={c.email}
+																onClick={handleSubmitSuspend}
+																className="status-btn-suspend"
+															>
+																Suspender
+															</button>
+														</td>
+													</tr>
+												);
+											})}
+										</>
+									) : (
+										<>
+											
+												{allUsers?.map((c) => {
+													return (
+														<tr key={c.id}>
+															<td>{c.storeName}</td>
+															<td>{c.date}</td>
+															<td>{c.plan}</td>
+															{c.status === 1 ? (
+																<td>
+																	<BsCheckCircle className="check-icon" />
+																</td>
+															) : (
+																<td>
+																	<BsXCircle className="X-icon" />
+																</td>
+															)}
+															<td>{c.cantidad_pedidos}</td>
+															{c.pagoConfirmado === 1 ? (
+																<td>SI</td>
+															) : (
+																<td>NO</td>
+															)}
+															{c.pagoCambioPlan === 1 ? (
+																<td>SI</td>
+															) : (
+																<td>NO</td>
+															)}
+															<td>
+																<a
+																	href={`mailto:${c.email}`}
+																	target="_blank"
+																	rel="noreferrer"
+																>
+																	<VscMail className="mail-icon" />
+																</a>
+															</td>
+															<td>
+																<button
+																	value={c.email}
+																	onClick={handleSubmitActivate}
+																	className="status-btn-activate"
+																>
+																	Activar
+																</button>
+															</td>
+															<td>
+																<button
+																	value={c.email}
+																	onClick={handleSubmitSuspend}
+																	className="status-btn-suspend"
+																>
+																	Suspender
+																</button>
+															</td>
+														</tr>
+													);
+												})}
+											
+										</>
+									)}
 								</tbody>
 							</table>
 							<div className="state-reference">
@@ -217,7 +307,7 @@ export default function AllClientsTable() {
 					</main>
 				)
 			) : (
-				<p>Cargando...</p>
+				<h1>Cargando...</h1>
 			)}
 		</div>
 	);

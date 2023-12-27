@@ -126,7 +126,12 @@
 	background: none;
 	border: none;
 }
+@media screen and (min-width:850px){
+	.menu-admin-container{
+		height: 100vh;
+	}
 
+}
 @media screen and (max-width: 850px) {
 	.sideMenuClosed {
 		display: none;
@@ -135,7 +140,9 @@
 	.admin-side-menu-web {
 		display: none;
 	}
-
+	.admin-side-link{
+		margin-bottom: 20px;
+	}
 	.admin-menu-mobile {
 		display: block;
 		position: fixed;
@@ -155,7 +162,11 @@
 		align-items: center;
 		background-color: #ffa101;
 		margin-top: 10px;
-		padding-top: 70px;
+		padding-top: 10px;
+		padding-bottom: 30px;
+		min-height: 100vh;
+		overflow-y: scroll;
+
 	}
 
 	.nav-menu-logo-mobile {
@@ -181,6 +192,7 @@
 	}
 
 	.menu-admin-container {
-		max-width: 200vw;
+		max-width: 100vw;
+		overflow-y: scroll;
 	}
 }

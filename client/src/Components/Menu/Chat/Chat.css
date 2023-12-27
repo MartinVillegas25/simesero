@@ -1,0 +1,36 @@
+/*estilos chat*/
+
+ul#divChatbox li:nth-child(odd){
+    background: #f1f1f1;
+    color:#000;
+    list-style: none;
+    
+}
+ul#divChatbox li:nth-child(even){
+     background: #cecece;
+    color:#000;
+    list-style: none;
+}
+ul#divChatbox li{
+    padding:15px 15px;
+    display: flex;
+    column-gap: 15px;
+}
+ul#divChatbox{
+    padding-left: 0px;
+    height: 100%;
+    max-height:63vh;
+    overflow-y: scroll;
+}
+h5{
+    margin:0px;
+    color: rgb(17,197,17);
+    text-transform: uppercase;
+    
+}
+form#formEnviar{
+    position: fixed;
+   
+    left: 0;
+    right: 0;
+}

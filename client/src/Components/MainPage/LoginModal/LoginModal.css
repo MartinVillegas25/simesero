@@ -89,7 +89,12 @@
 	margin-left: 5px;
 	color: orange;
 }
-
+.new-password{
+	background-color: transparent;
+	border: none;
+	color:orange;
+	text-decoration: none;
+}
 @media (max-width: 768px) {
 	.login {
 		background-color: rgba(255, 255, 255, 1);

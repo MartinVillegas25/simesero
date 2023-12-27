@@ -20,7 +20,7 @@ span.total-clients {
 .act-table-container {
 	width: 90%;
 	min-width: fit-content;
-	height: 500px;
+	height: 450px;
 	overflow-y: scroll;
 	flex-shrink: 0;
 	text-align: center;
@@ -28,6 +28,8 @@ span.total-clients {
 	background: #f1f1f1;
 	color: #000;
 	padding: 15px;
+	margin-bottom: 40px;;
+	border-radius: 0;
 }
 .act-table {
 	overflow-y: scroll;
@@ -119,8 +121,76 @@ span.total-clients {
 .nav-open{
     height: 100vh;
 }
+.buscar button{
+	background-color:#fff;
+	height: 39px;
+	width: 4%;
+	border-radius:10px 0 0px 10px;
+	border:none;
+	
+}
+.buscar{
+	margin-bottom: 10px;
+	width: 90%;
+	padding: 15px;
+	
+}
+.buscar button path{
+	fill:#FFA500;
+	
+}
+.input-buscar{
+	width: 95%;
+	border-radius: 0 10px 10px 0;
+	
+
+}
+.admin-tabla-usuarios tr{
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	border:none;
+	background-color: #ccc;
+}
+.admin-tabla-usuarios tr th{
+	border: none;
+	background-color: #ccc;
+}
+@media screen and (min-width:850px){
+	
+	
+	.admin-tabla-usuarios, .act-table-body {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	
+	.admin-tabla-usuarios th, .admin-tabla-usuarios td , .act-table-body th, .act-table-body td{
+		padding: 10px;
+		border: 1px solid #ddd;
+		text-align: left;
+	}
+	
+	.admin-tabla-usuarios th, .act-table-body th{
+		background-color: #f2f2f2;
+	}
+	
+	.admin-tabla-usuarios tr, .act-table-body tr{
+		max-width: 100px; /* Ajusta el valor según tus necesidades */
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	
+}
 
 @media screen and (max-width: 850px) {
+	.buscar button{
+		display: none;
+	}
+	.input-buscar{
+		border-radius: 10px;
+	}
 	.act-container {
 		margin-top: 20px;
 		margin-left: 0px;

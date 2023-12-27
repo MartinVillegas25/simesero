@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import './NewPasword.css'
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { changePassword } from '../../../redux/actions';

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import './Chat.css';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,35 +52,41 @@ export default function Chat() {
 	function renderizarMensajes(mensaje, yo) {
 		const fecha = new Date(mensaje?.fecha);
 		const hora = `${fecha.getHours()}:${fecha.getMinutes()}`;
-
+	
 		let html = yo ? (
-			<li className="reverse">
+			`<li className="reverse">
 				<div className="chat-content">
 					<h5>${mensaje.mesa}</h5>
 					<div className="box bg-light-inverse">${mensaje.mensaje}</div>
 				</div>
 				<div className="chat-time">${hora}</div>
-			</li>
+			</li>`
 		) : (
-			<li className="animated fadeIn">
-				$
-				{mensaje?.mesa !== 'Administrador'
-					? `<div className="chat-img"><img src="https://res.cloudinary.com/dj3akdhb9/image/upload/v1695696885/icons8-circundado-usuario-mujer-tipo-4-de-la-piel-48_ttarml.png" alt="user" /></div>`
-					: ''}
+			`<li className="animated fadeIn">
+				${
+					mensaje?.mesa !== 'Administrador'
+						? `<div className="chat-img"><img src="https://res.cloudinary.com/dj3akdhb9/image/upload/v1695696885/icons8-circundado-usuario-mujer-tipo-4-de-la-piel-48_ttarml.png" alt="user" /></div>`
+						: ''
+				}
 				<div className="chat-content">
 					<h5>${mensaje?.mesa}</h5>
 					<div className="box bg-light-info">${mensaje?.mensaje}</div>
 				</div>
 				<div className="chat-time">${hora}</div>
-			</li>
+			</li>`
 		);
-
+	
 		divChatbox?.insertAdjacentHTML('beforeend', html);
 	}
+	
 
 	function scrollBottom() {
+		// Verificar si divChatbox es null o undefined
+		if (!divChatbox) {
+			return;
+		}
 		const newMessage = divChatbox.querySelector('li:last-child');
-
+		if (newMessage) {
 		const clientHeight = divChatbox.clientHeight;
 		const scrollTop = divChatbox.scrollTop;
 		const scrollHeight = divChatbox.scrollHeight;
@@ -96,14 +103,18 @@ export default function Chat() {
 			divChatbox.scrollTop = scrollHeight;
 		}
 	}
+}
 
 	useEffect(() => {
 		socket.on('connect', () => {
-			console.log('conenctado menu');
+			console.log('conectado a la sala' + usuario.email);
 			socket.emit('entrarChat', usuario, (resp) => {
 				// console.log('Usuarios conectados', resp);
 				renderizarUsuarios(resp);
 			});
+
+			//unirse a la sala del email para el chat
+			socket.emit('join-room', { room: usuario.email });
 		});
 		socket.on('crearMensaje', (mensaje) => {
 			// console.log('Servidor:', mensaje);
@@ -134,6 +145,7 @@ export default function Chat() {
 			(mensaje) => {
 				txtMensaje.value = '';
 				txtMensaje.focus();
+				console.log(mensaje);
 				renderizarMensajes(mensaje, true);
 				scrollBottom();
 			}

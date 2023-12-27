@@ -726,28 +726,28 @@ const nuevosValores = async (req, res) => {
 
 			const nuevosPlanes = await pool.query(sql2, values2);
 
-			for (let i = 0; i < email.length; i++) {
-				console.log('mail a mandar', email[i].email);
-				nuevoValoresCorreo(
-					email[i],
-					nuevosPlanes.standard,
-					nuevosPlanes.premium
-				);
-				i++;
-			}
+			// for (let i = 0; i < email.length; i++) {
+			// 	console.log('mail a mandar', email[i].email);
+			// 	nuevoValoresCorreo(
+			// 		email[i],
+			// 		nuevosPlanes.standard,
+			// 		nuevosPlanes.premium
+			// 	);
+			// 	i++;
+			// }
 			res.status(201).json({
 				nuevosPlanes
 			});
 		} else {
 			const planesActulizados = await pool.query(query2);
-			const standard = planesActulizados[0][0].standard;
-			const premium = planesActulizados[0][0].premium;
-			const resultEmails = await pool.query(query3);
-			const email = resultEmails[0];
-			for (let i = 0; i < email.length; i++) {
-				console.log('mail a mandar', email[i].email);
-				nuevoValoresCorreo(email[i].email, standard, premium);
-			}
+			// const standard = planesActulizados[0][0].standard;
+			// const premium = planesActulizados[0][0].premium;
+			// const resultEmails = await pool.query(query3);
+			// const email = resultEmails[0];
+			// for (let i = 0; i < email.length; i++) {
+			// 	console.log('mail a mandar', email[i].email);
+			// 	nuevoValoresCorreo(email[i].email, standard, premium);
+			// }
 
 			res.status(200).json(planesActulizados[0][0]);
 		}

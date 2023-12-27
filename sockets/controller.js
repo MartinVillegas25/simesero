@@ -93,43 +93,44 @@ const socketController = (socket, io) => {
 
 	// chat por restaurant
 
-	// 	socket.on('entrarChat', (data, callback) => {
-	// 		console.log('data', data);
+		socket.on('entrarChat', (data, callback) => {
+			console.log('data', data);
 
-	// 		if (!data.mesa || !data.email) {
-	// 			return callback({
-	// 				error: true,
-	// 				mensaje: 'El nombre/sala es necesario'
-	// 			});
-	// 		}
+			if (!data.mesa || !data.email) {
+				return callback({
+					error: true,
+					mensaje: 'El nombre/sala es necesario'
+				});
+			}
 
-	// 		socket.join(data.email);
+			socket.join(data.email);
+			console.log('joined', data.email);
+			usuarios.agregarPersona(socket.id, data.mesa, data.email);
 
-	// 		usuarios.agregarPersona(socket.id, data.mesa, data.email);
+			socket
+				.to(data.email)
+				.emit('listaPersona', usuarios.getPersonasPorSala(data.email));
 
-	// 		socket
-	// 			.to(data.email)
-	// 			.emit('listaPersona', usuarios.getPersonasPorSala(data.email));
+			callback(usuarios.getPersonasPorSala(data.email));
+		});
 
-	// 		callback(usuarios.getPersonasPorSala(data.email));
-	// 	});
+		socket.on('crearMensaje', (data, callback) => {
+			console.log('data', data);
+			let persona = usuarios.getPersona(socket.id);
+			console.log('persona', persona);
+			let mensaje = crearMensaje(data.mesa, data.mensaje);
+			socket.to(persona.email).emit('crearMensaje', mensaje);
+			console.log(mensaje);
+			callback(mensaje);
+		});
 
-	// 	socket.on('crearMensaje', (data, callback) => {
-	// 		let persona = usuarios.getPersona(socket.id);
+		// socket.on('disconnect', () => {
+		// 	let personaBorrada = usuarios.borrarPersona(socket.id);
 
-	// 		let mensaje = crearMensaje(persona.mesa, data.mensaje);
-	// 		socket.to(persona.email).emit('crearMensaje', mensaje);
-
-	// 		callback(mensaje);
-	// 	});
-
-	// 	socket.on('disconnect', () => {
-	// 		let personaBorrada = usuarios.borrarPersona(socket.id);
-
-	// 		socket
-	// 			.to(personaBorrada.email)
-	// 			.emit('listaPersona', usuarios.getPersonasPorSala(personaBorrada.email));
-	// 	});
+		// 	socket
+		// 		.to(personaBorrada.email)
+		// 		.emit('listaPersona', usuarios.getPersonasPorSala(personaBorrada.email));
+		// });
 
 	// 	// Mensajes privados
 	// 	socket.on('mensajePrivado', (data) => {
