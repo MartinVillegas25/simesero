@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from '../../../redux/actions';
 import img from '../../../assets/restaurant.jpg';
+import logo from '../../../assets/logos/Logo2.png';
 
 // eslint-disable-next-line react/prop-types
 export default function SubscribeModal({ handleCloseSubscribe }) {
@@ -144,8 +145,16 @@ export default function SubscribeModal({ handleCloseSubscribe }) {
 			return;
 		} else if (input.pais.trim() === '') {
 			alert('Ingrese su país');
+			return;
 		} else if (input.localidad.trim() === '') {
 			alert('Ingrese su localidad');
+			return;
+		} else if (input.plan.trim() === '') {
+			alert('Seleccione un tipo de plan');
+			return;
+		} else if (input.tipo.trim() === '') {
+			alert('Seleccione un tipo de comercio');
+			return;
 		}
 
 		// Si no hay errores, despachar la acción de registrar el usuario
@@ -180,7 +189,10 @@ export default function SubscribeModal({ handleCloseSubscribe }) {
 			<div className="subscribe-container">
 				<div className="subscribe-input">
 					<h2>
-						Bienvenido a <span>SiMesero</span>
+						Bienvenido a{' '}
+						<span>
+							<img src={logo} alt="" className="register-logo" />
+						</span>{' '}
 					</h2>
 					<p>
 						Si ya tienes una cuenta <a href="">Inicia Sesión</a>
@@ -213,92 +225,95 @@ export default function SubscribeModal({ handleCloseSubscribe }) {
 					<p>Completa los siguientes datos:</p>
 					<div className="subs-data">
 						<div className="subs-data-container">
+							<label htmlFor="">Nombre completo</label>
 							<input
 								type="text"
-								placeholder="Nombre completo"
 								name="name"
 								className="subs-input"
 								value={input.name}
 								onChange={handleChange}
 							/>
+							<label htmlFor="">Nombre del local</label>
 							<input
 								type="text"
-								placeholder="Nombre del local"
 								name="storeName"
 								className="subs-input"
 								value={input.storeName}
 								onChange={handleChange}
 							/>
+							<label htmlFor="">Direccion</label>
 							<input
 								type="text"
-								placeholder="Dirección"
 								name="address"
 								className="subs-input"
 								value={input.address}
 								onChange={handleChange}
 							/>
+							<label htmlFor="">Codigo postal</label>
 							<input
 								type="number"
-								placeholder="Código Postal"
 								name="cp"
 								className="subs-input"
 								value={input.cp}
 								onChange={handleChange}
 							/>
+							<label htmlFor="">Foto de perfil</label>
 							<input
 								type="file"
-								placeholder="Foto perfil"
 								accept="image/*"
 								name="img"
 								className="subs-input"
 								value={input.img}
 								onChange={handleChange}
 							/>
-
+							<label htmlFor="">Telefono</label>
 							<input
 								type="number"
-								placeholder="Teléfono"
 								name="telefono"
 								className="subs-input"
 								value={input.telefono}
 								onChange={handleChange}
 							/>
+							<label htmlFor="">País</label>
 							<input
 								type="text"
-								placeholder="País"
 								name="pais"
 								className="subs-input"
 								value={input.pais}
 								onChange={handleChange}
 							/>
+							<label htmlFor="">Localidad</label>
 							<input
 								type="text"
-								placeholder="Localidad"
 								name="localidad"
 								className="subs-input"
 								value={input.localidad}
 								onChange={handleChange}
 							/>
+							<label htmlFor="">Comentario</label>
 							<input
 								type="text"
-								placeholder="Comentario"
 								name="comentario"
 								className="subs-input"
 								value={input.comentario}
 								onChange={handleChange}
 							/>
-							<p>¿Qué tipo de comercio es?</p>
+							<label htmlFor="">Tipo de comercio</label>
 							<div className="subs-plan">
 								<select name="tipo" onClick={handleChange}>
 									<option value="">-</option>
 									<option value="cafe">Café</option>
 									<option value="restaurant">Restaurante</option>
 									<option value="bar">Bar</option>
+									<option value="hotel">Hotel</option>
+									<option value="otro">Otro</option>
 								</select>
 							</div>
 						</div>
 					</div>
-					<p>Selecciona el plan ideal para ti:</p>
+					<label htmlFor="" className="select-plan-label">
+						Selecciona el plan ideal para ti:
+					</label>
 					<div className="plan-data">
 						<div className="subs-plans">
 							<select name="plan" onClick={handleChange}>
@@ -309,6 +324,7 @@ export default function SubscribeModal({ handleCloseSubscribe }) {
 							</select>
 						</div>
 					</div>
+					<p>* campos obligatorios</p>
 					<div className="subs-btn-container">
 						{input.plan === 'standard' ? (
 							<div>

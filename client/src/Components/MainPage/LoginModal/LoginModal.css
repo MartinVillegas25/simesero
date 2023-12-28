@@ -55,7 +55,7 @@
 .remember {
 	margin-top: 10px;
 	display: flex;
-	justify-content:start;
+	justify-content: start;
 	align-items: center;
 	font-size: 10px;
 	font-weight: 300;
@@ -63,6 +63,7 @@
 
 .remember div {
 	display: flex;
+	align-items: center;
 }
 
 .login-btn {
@@ -89,24 +90,20 @@
 	margin-left: 5px;
 	color: orange;
 }
-.new-password{
+.new-password {
 	background-color: transparent;
 	border: none;
-	color:orange;
+	color: orange;
 	text-decoration: none;
 }
 @media (max-width: 768px) {
 	.login {
 		background-color: rgba(255, 255, 255, 1);
 		color: #000;
-		width: 80vw;
+		width: 270px;
+		padding-left: 0;
+		margin-left: -40px;
 		height: 100%;
-		position: relative;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin: auto;
 	}
 
 	.login-img {

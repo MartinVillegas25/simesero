@@ -7,7 +7,6 @@ import Testimonials from './MainPage/Testimonials/Testimonials';
 import Subscription from './MainPage/Subscription/Subscription';
 import Footer from './MainPage/Footer/Footer';
 
-
 export default function MainPage() {
 	return (
 		<div className="App">
@@ -15,17 +14,17 @@ export default function MainPage() {
 			<section>
 				<FirstView />
 			</section>
-			<Fade direction="left"  duration={3000}>
+			<Fade direction="left" duration={3000}>
 				<section id="nosotros">
 					<AboutUs />
 				</section>
 			</Fade>
-			<Fade cascade  duration={3000}>
+			<Fade cascade duration={3000}>
 				<section>
 					<AppDetails />
 				</section>
 			</Fade>
-			<Fade cascade  duration={3000}>
+			<Fade cascade duration={3000}>
 				<section id="testimonios">
 					<Testimonials />
 				</section>

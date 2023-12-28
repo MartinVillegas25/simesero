@@ -84,6 +84,7 @@ div.circle a {
 	background-repeat: no-repeat;
 	rotate: -20deg;
 	margin-top: 200px;
+	box-shadow: 0 0 20px rgb(234, 128, 7);
 }
 .fv-imgs :nth-child(2) {
 	width: 150px;
@@ -94,6 +95,7 @@ div.circle a {
 	background-size: cover;
 	background-repeat: no-repeat;
 	rotate: -20deg;
+	box-shadow: 0 0 20px rgb(234, 128, 7);
 }
 .fv-imgs :nth-child(3) {
 	width: 120px;
@@ -104,25 +106,26 @@ div.circle a {
 	background-size: cover;
 	background-repeat: no-repeat;
 	rotate: -20deg;
+	box-shadow: 0 0 20px rgb(234, 128, 7);
 }
 .about-imgs {
 	display: none;
 }
-.fv-plan-btn-mobile{
+.fv-plan-btn-mobile {
 	display: none;
 }
-.title-mobile{
+.title-mobile {
 	display: none;
 }
 
 @media screen and (max-width: 850px) {
-	.title-desk{
+	.title-desk {
 		display: none;
 	}
-	.title-mobile{
+	.title-mobile {
 		display: block;
 	}
-	.fv-plan-btn-mobile{
+	.fv-plan-btn-mobile {
 		display: block;
 		display: flex;
 		justify-content: center;
@@ -137,11 +140,11 @@ div.circle a {
 
 		border-radius: 10px;
 	}
-	
+
 	.fv-title h1 {
 		font-size: 42px;
 	}
-	
+
 	.fv {
 		height: auto;
 		width: auto;
@@ -220,7 +223,6 @@ div.circle a {
 
 	.fv-plan-btn {
 		display: none;
-		
 	}
 	.about-imgs {
 		display: flex;

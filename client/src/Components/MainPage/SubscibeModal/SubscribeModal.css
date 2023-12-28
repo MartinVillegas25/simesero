@@ -9,7 +9,7 @@
 
 .subscribe span {
 	color: orange;
-	margin-left: 10px;
+
 	font-size: 28px;
 }
 
@@ -32,6 +32,13 @@
 	margin-right: 30px;
 }
 
+.register-logo {
+	width: 150px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: start;
+}
 .subscribe-img {
 	position: absolute;
 	top: 0;
@@ -171,6 +178,35 @@
 	justify-content: center;
 }
 
+.subs-data-container select {
+	background-color: rgb(247, 244, 244);
+	border: none;
+	color: #000;
+	border-radius: 10px;
+}
+
+.plan-data select {
+	background-color: rgb(247, 244, 244);
+	border: none;
+	color: #000;
+	border-radius: 10px;
+}
+
+.subs-data-container label {
+	font-size: 13px;
+	margin: 5px 5px;
+}
+
+.select-plan-label {
+	font-size: 13px;
+	margin-left: 5px;
+	padding-top: 8px;
+}
+
+.plan-data {
+	margin-top: 10px;
+}
+
 @media (max-width: 768px) {
 	.subscribe {
 		background-color: rgba(255, 255, 255, 1);
@@ -185,7 +221,7 @@
 	}
 
 	.subscribe-container {
-		margin-left: 15;
+		margin-left: 10px;
 		width: 300px;
 	}
 
@@ -195,15 +231,9 @@
 	.subscribe-input {
 		display: flex;
 		flex-direction: column;
-		align-items: start;
+		width: 90%;
 	}
 
-	.subs-data-container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
 	.subs-plans {
 		display: flex;
 		flex-direction: column;
@@ -219,12 +249,11 @@
 	}
 
 	.plan-data {
-		margin-left: 15%;
 		margin-bottom: 20px;
 	}
 
 	.subs-btn-container {
 		margin-bottom: 40px;
-		margin-left: 10%;
+		margin-left: 0;
 	}
 }

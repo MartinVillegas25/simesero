@@ -162,7 +162,7 @@ export default function LoginModal({ handleCloseLogin, handleOpenSuscribe }) {
 							/>{' '}
 							<p>Recordarme</p>
 						</div>
-						<button className='new-password' onClick={handleEmailPassword}>
+						<button className="new-password" onClick={handleEmailPassword}>
 							Olvidaste la contraseña?
 						</button>
 					</div>
@@ -181,8 +181,8 @@ export default function LoginModal({ handleCloseLogin, handleOpenSuscribe }) {
 					)}
 
 					<div className="login-to-register">
-						<p>No tienes una cuenta?</p>
-						<button className='login-btn' onClick={openSuscribe}>
+						<p>¿No tienes una cuenta?</p>
+						<button className="login-btn" onClick={openSuscribe}>
 							Registrate
 						</button>
 					</div>

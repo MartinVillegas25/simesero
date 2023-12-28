@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-const url = 'http://localhost:3002'
+const url = 'http://localhost:3002';
 import axios from 'axios';
 
 export const CREATE_USER = 'CREATE_USER';
@@ -51,10 +51,7 @@ export const GET_PLAN_TO_MENU = 'GET_PLAN_TO_MENU';
 export function createUser(payload) {
 	return async function (dispatch) {
 		try {
-			const info = await axios.post(
-				`${url}/subscription`,
-				payload
-			);
+			const info = await axios.post(`${url}/subscription`, payload);
 			console.log('entro en create');
 			return dispatch({
 				type: CREATE_USER,
@@ -72,10 +69,7 @@ export function createAdmin(payload) {
 	return async function (dispatch) {
 		console.log('creando admin');
 		try {
-			const info = await axios.post(
-				`${url}/admin-boss`,
-				payload
-			);
+			const info = await axios.post(`${url}/admin-boss`, payload);
 
 			return dispatch({
 				type: CREATE_ADMIN,
@@ -564,12 +558,9 @@ export function getSubCategories(payload) {
 				'x-token': token
 			};
 			axios
-				.get(
-					`${url}/dashboard/subcategorias?categoria=${payload}`,
-					{
-						headers
-					}
-				)
+				.get(`${url}/dashboard/subcategorias?categoria=${payload}`, {
+					headers
+				})
 				.then((response) => {
 					console.log(response.data);
 					console.log('entro');
@@ -739,14 +730,12 @@ export function getPedidos() {
 export function getProducts(payload) {
 	return async function (dispatch) {
 		try {
-			axios
-				.get(`${url}/dashboard/items?email=${payload}`)
-				.then((response) => {
-					return dispatch({
-						type: GET_PRODUCTS,
-						payload: response.data
-					});
+			axios.get(`${url}/dashboard/items?email=${payload}`).then((response) => {
+				return dispatch({
+					type: GET_PRODUCTS,
+					payload: response.data
 				});
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -756,14 +745,12 @@ export function getProducts(payload) {
 export function getMenuCategories(payload) {
 	return async function (dispatch) {
 		try {
-			axios
-				.get(`${url}/menu/categorias?email=${payload}`)
-				.then((response) => {
-					return dispatch({
-						type: GET_MENU_CATEGORIES,
-						payload: response.data
-					});
+			axios.get(`${url}/menu/categorias?email=${payload}`).then((response) => {
+				return dispatch({
+					type: GET_MENU_CATEGORIES,
+					payload: response.data
 				});
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -791,10 +778,7 @@ export function ordering(email, mesa, payload) {
 		console.log(payload);
 		try {
 			axios
-				.post(
-					`${url}/pedido?email=${email}&mesa=${mesa}`,
-					payload
-				)
+				.post(`${url}/pedido?email=${email}&mesa=${mesa}`, payload)
 				.then((response) => {
 					return dispatch({
 						type: ORDER,
@@ -818,12 +802,9 @@ export function deletePedido(mesa, nombre) {
 				'x-token': token
 			};
 			axios
-				.delete(
-					`${url}/liberar-pedido?mesa=${mesa}&nombre=${nombre}`,
-					{
-						headers
-					}
-				)
+				.delete(`${url}/liberar-pedido?mesa=${mesa}&nombre=${nombre}`, {
+					headers
+				})
 				.then((response) => {
 					return dispatch({
 						type: DELETE_PEDIDOS,
@@ -840,14 +821,12 @@ export function deletePedido(mesa, nombre) {
 export function getPlanToMenu(email) {
 	return async function (dispatch) {
 		try {
-			axios
-				.get(`${url}/menu?email=${email}`)
-				.then((response) => {
-					return dispatch({
-						type: GET_PLAN_TO_MENU,
-						payload: response.data
-					});
+			axios.get(`${url}/menu?email=${email}`).then((response) => {
+				return dispatch({
+					type: GET_PLAN_TO_MENU,
+					payload: response.data
 				});
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -859,17 +838,15 @@ export function passwordEmail(payload) {
 	return async function (dispatch) {
 		console.log(payload);
 		try {
-			axios
-				.post(`${url}/save-password`, payload)
-				.then((response) => {
-					alert(
-						`Se ha enviado un email a ${payload.email} con los pasos a seguir `
-					);
-					return dispatch({
-						type: PASSWORD_EMAIL,
-						payload: response.data
-					});
+			axios.post(`${url}/save-password`, payload).then((response) => {
+				alert(
+					`Se ha enviado un email a ${payload.email} con los pasos a seguir, revisar spam `
+				);
+				return dispatch({
+					type: PASSWORD_EMAIL,
+					payload: response.data
 				});
+			});
 		} catch (error) {
 			console.log(error);
 		}

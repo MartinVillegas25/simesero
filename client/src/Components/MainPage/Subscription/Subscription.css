@@ -37,6 +37,7 @@
 	width: 200px;
 	height: 400px;
 	margin-left: 50px;
+	box-shadow: 0 0 20px rgb(234, 128, 7);
 }
 
 .icon {

@@ -79,7 +79,10 @@ export default function NavBar() {
 							<img src={logo2} alt="" className="nav-logo" />
 						</div>
 						<div className="navBar-icon">
-							<BsPersonCircle className="navBar-icon-child" />
+							<BsPersonCircle
+								className="navBar-icon-child"
+								onClick={handleOpenLogin}
+							/>
 						</div>
 					</div>
 				</div>
