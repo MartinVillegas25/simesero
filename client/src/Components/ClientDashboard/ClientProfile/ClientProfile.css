@@ -8,6 +8,7 @@
 
 .client-menu-panel {
 	display: flex;
+	align-items: center;
 }
 
 .client-menu-container h3 {
@@ -34,6 +35,7 @@
 }
 
 .panel-open {
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

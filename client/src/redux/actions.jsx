@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-const url = 'http://localhost:3002';
+const url = 'http://localhost:3000';
 import axios from 'axios';
 
 export const CREATE_USER = 'CREATE_USER';

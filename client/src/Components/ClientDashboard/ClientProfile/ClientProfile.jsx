@@ -1,9 +1,11 @@
 import { IoNotifications } from 'react-icons/io5';
 import { RxTriangleDown } from 'react-icons/rx';
 import './ClientProfile.css';
-import CEO from '../../../assets/CEO.jpg';
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLocalData } from '../../../redux/actions';
 
 // eslint-disable-next-line react/prop-types
 export default function ClientProfile() {
@@ -15,13 +17,18 @@ export default function ClientProfile() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 	const userEmail = searchParams.get('email');
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getLocalData(userEmail));
+	}, []);
+	const dataLocal = useSelector((state) => state.localData.usuario);
 
 	return (
 		<nav className="client-menu">
 			<div className="client-menu-container">
 				<div className="client-menu-panel">
 					<IoNotifications className="client-menu-notification" />
-					<img src={CEO} alt="" className="client-menu-img" />
+					<img src={dataLocal?.img} alt="" className="client-menu-img" />
 					<div>
 						<div>
 							<h3>Mi cuenta</h3>
