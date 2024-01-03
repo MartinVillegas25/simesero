@@ -165,9 +165,9 @@
 }
 
 .payment-btn {
-	width: 286px;
-	height: 45px;
-	flex-shrink: 0;
+	width: 70%;
+	height: 40px;
+	margin-top: 20px;
 	border-radius: 15px;
 	background: #f4eeee;
 	color: #000;

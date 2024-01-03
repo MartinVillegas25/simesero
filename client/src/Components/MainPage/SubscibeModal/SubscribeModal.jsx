@@ -8,7 +8,10 @@ import img from '../../../assets/restaurant.jpg';
 import logo from '../../../assets/logos/Logo2.png';
 
 // eslint-disable-next-line react/prop-types
-export default function SubscribeModal({ handleCloseSubscribe }) {
+export default function SubscribeModal({
+	handleCloseSubscribe,
+	handleOpenLogin
+}) {
 	const dispatch = useDispatch();
 	const newUser = useSelector((state) => state.newUser);
 
@@ -181,6 +184,10 @@ export default function SubscribeModal({ handleCloseSubscribe }) {
 		window.location.reload(true);
 	};
 
+	const openLogin = () => {
+		dispatch(handleCloseSubscribe(), handleOpenLogin());
+	};
+
 	return (
 		<div className="subscribe">
 			<button className="subscribe-close-btn" onClick={handleCloseSubscribe}>
@@ -195,7 +202,8 @@ export default function SubscribeModal({ handleCloseSubscribe }) {
 						</span>{' '}
 					</h2>
 					<p>
-						Si ya tienes una cuenta <a href="">Inicia Sesión</a>
+						Si ya tienes una cuenta{' '}
+						<button onClick={openLogin}>Inicia Sesión</button>
 					</p>
 
 					<div>

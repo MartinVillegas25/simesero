@@ -100,9 +100,7 @@ export default function Products() {
 													</div>
 													<div className="product-info">
 														<p className="product-name">{producto.nombre}</p>
-														<p className="product-price">
-															Precio: ${producto.precio}
-														</p>
+														<p className="product-price">${producto.precio}</p>
 													</div>
 													<div className="product-add">
 														<button

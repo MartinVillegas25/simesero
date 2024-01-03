@@ -7,24 +7,23 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/socket.io': {
-				target: 'http://localhost:3002',
+				target: 'http://localhost:3000',
 				changeOrigin: true,
 				ws: true
 			}
 		}
 	},
 	optimize: {
-	minify: 'terser',
-	target: 'es2015', // o 'es2015' dependiendo de tus necesidades
+		minify: 'terser',
+		target: 'es2015' // o 'es2015' dependiendo de tus necesidades
 	},
 	build: {
-	brotli: true,
-	chunkSizeWarningLimit: 1000,
-	rollupOptions: {
-		plugins: [],
-	},
-	},
+		brotli: true,
+		chunkSizeWarningLimit: 1000,
+		rollupOptions: {
+			plugins: []
+		}
+	}
 });
-  
 
 // target: 'https://menu-didactico.up.railway.app',

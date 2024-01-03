@@ -34,10 +34,10 @@ export default function Call() {
 		<div className="call-container">
 			<div>
 				<h2 className="call-text">
-					Desea llamar al camarero/a? presione el siguiente boton
+					Desea llamar al mesero/a? presione el siguiente boton
 				</h2>
 			</div>
-			<p>Llamar camarero/a</p>
+			<p>Llamar mesero/a</p>
 			<button onClick={handleSubmit} className="call-btn">
 				<PiCallBellDuotone className="call-logo" />
 			</button>

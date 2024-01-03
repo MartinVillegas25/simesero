@@ -27,7 +27,7 @@ export default function Cart() {
 	// Poner el nombre de usuario
 	const [userName, setUserName] = useState('');
 	const handleUserName = (e) => {
-		setUserName(e.target.value);
+		setUserName(e.target.value.toUpperCase());
 	};
 
 	const [comment, setComment] = useState('');

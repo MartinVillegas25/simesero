@@ -11,13 +11,18 @@ const socket = io();
 export default function Pay() {
 	const [nombre, setNombre] = useState('');
 	const [payMethod, setPayMethod] = useState('');
+	const [payType, setPayType] = useState('');
 	const dispatch = useDispatch();
 	const handleSetName = (e) => {
-		setNombre(e.target.value);
+		setNombre(e.target.value.toUpperCase());
 	};
 
 	const handleSetMethod = (e) => {
 		setPayMethod(e.target.value);
+	};
+
+	const handleSetPayType = (e) => {
+		setPayType(e.target.value);
 	};
 
 	const location = useLocation();
@@ -74,13 +79,19 @@ export default function Pay() {
 							<option value="Mercado Pago">Mercado Pago</option>
 							<option value="otro">Otro</option>
 						</select>
+
+						<h2>Seleccione tipo de pago</h2>
+						<select name="payment-type" id="" onClick={handleSetPayType}>
+							<option value="-">-</option>
+							<option value="dividir">Quiero dividir la cuenta</option>
+							<option value="pagar-total">Quiero pagar el total</option>
+							<option value="pagar-parte">Quiero pagar una parte</option>
+						</select>
+
+						<button className="payment-btn" onClick={handleSubmit}>
+							Pedir la cuenta
+						</button>
 					</div>
-
-					<button className="payment-btn" onClick={handleSubmit}>
-						Pedir la cuenta
-					</button>
-
-					<a href="">Volver al menú</a>
 				</div>
 			)}
 		</div>
