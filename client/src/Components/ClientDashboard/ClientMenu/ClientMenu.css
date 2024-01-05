@@ -13,7 +13,14 @@
 	font-size: 18px;
 	padding: 10px 0;
 }
-
+.h4-menu-borrar{
+	margin: 20px 0 20px;
+	text-align: center;
+	background-color: rgb(155, 2, 2);
+	color: #fff;
+	font-size: 18px;
+	padding: 10px 0;
+}
 .create-menu-container {
 	width: 600px;
 }
@@ -172,4 +179,19 @@
 }
 .product-edit-popup{
     text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+	.client-create-menu-container{
+		display: block;
+		width: 90vw;
+		margin: auto;
+	}
+	.create-menu-container{
+		width: 100%;
+	}
+	.menu-mobile-admin{
+		margin:0 auto 40px ;
+	}
+
 }

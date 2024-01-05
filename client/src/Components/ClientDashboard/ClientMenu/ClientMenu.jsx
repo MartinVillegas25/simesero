@@ -239,7 +239,7 @@ export default function ClientMenu() {
 						</div>
 					</div>
 
-					<h4 className="h4-menu">Borrar Categoria</h4>
+					<h4 className="h4-menu-borrar">Borrar Categoria</h4>
 					<div className="create-menu-input create-menu-select">
 						<div>
 							<label htmlFor="">Categorias existentes: </label>
@@ -264,7 +264,7 @@ export default function ClientMenu() {
 						</button>
 					</div>
 				</div>
-				<h4 className="h4-menu">Nueva Subcategoria</h4>
+				<h4 className="h4-menu">Nueva Sub categoria</h4>
 				<div>
 					<div className="create-menu-input">
 						<label htmlFor="">Titulo de la categoria: </label>
@@ -296,7 +296,7 @@ export default function ClientMenu() {
 						</button>
 					</div>
 
-					<h4 className="h4-menu">Borrar Subcategoria</h4>
+					<h4 className="h4-menu-borrar">Borrar Subcategoria</h4>
 
 					<div className="create-menu-input create-menu-select">
 						<div>
@@ -321,7 +321,7 @@ export default function ClientMenu() {
 				<h4 className="h4-menu">Agregar Producto</h4>
 				<div>
 					<div className="create-menu-input">
-						<label htmlFor="">Categoria: </label>
+						<label htmlFor="">Categoria*: </label>
 						<select
 							name="categoria"
 							id=""
@@ -341,7 +341,7 @@ export default function ClientMenu() {
 						</select>{' '}
 					</div>
 					<div className="create-menu-input">
-						<label htmlFor="">Sub Categoria: </label>
+						<label htmlFor="">Sub Categoria*: </label>
 						<select
 							name="subcategoria"
 							id=""
@@ -360,7 +360,7 @@ export default function ClientMenu() {
 						</select>{' '}
 					</div>
 					<div className="create-menu-input">
-						<label htmlFor="">Nombre:</label>
+						<label htmlFor="">Nombre*:</label>
 						<input
 							type="text"
 							name="nombre"
@@ -369,7 +369,7 @@ export default function ClientMenu() {
 						/>
 					</div>
 					<div className="create-menu-input">
-						<label htmlFor="">Precio: $</label>
+						<label htmlFor="">Precio*: $</label>
 						<input
 							type="number"
 							name="precio"

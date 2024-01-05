@@ -54,7 +54,7 @@ class TicketControl {
         }
         this.ultimos4[email].unshift(evento);
 
-        if (this.ultimos4[email].length > 4) {
+        if (this.ultimos4[email].length > 10) {
             this.ultimos4[email].splice(-1, 1);
         }
 
@@ -91,7 +91,7 @@ class TicketControl {
         const minutos = horaActual.getMinutes(); 
 
         const ticket = this.mesas.shift(); // this.tickets[0];
-        ticket.mesa = hora + ':' + minutos + ' Camarera Mesa ' + mesa;
+        ticket.mesa = hora + ':' + minutos + ' Mesero/a a Mesa ' + mesa;
         
         this.agregarEventoSala(email, ticket.mesa);
 

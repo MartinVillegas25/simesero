@@ -25,11 +25,13 @@
 
 .client-side-menu-logo {
 	width: 200px;
+	padding:100px 0 40px 0;
 }
 
 .client-side-link {
 	margin-right: 50px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
+	padding-left:25px;
 	width: max-content;
 	display: flex;
 	text-transform: uppercase;
@@ -123,49 +125,92 @@
 	margin-top: 10px;
 	border: 1px solid #fff;
 }
-
+.admin-side-img-change{
+	padding:10px 20px 0 20px;
+	text-align: center;
+	
+}
 @media screen and (max-width: 850px) {
-	.client-side-menu-web {
+	.sideMenuClosed {
 		display: none;
 	}
+
 	.admin-side-menu-web {
 		display: none;
 	}
-	.client-menu-mobile {
+	.client-side-menu-web{
+		display: none;
+	}
+	.admin-side-link{
+		margin-bottom: 20px;
+	}
+	.admin-menu-mobile {
 		display: block;
 		position: fixed;
+		top: 0;
 		height: 60px;
-		background-color: #ffa101;
-		width: 100%;
+		background-color: orange;
+		width: 100vw;
+		z-index: 1000;
 	}
 
 	.nav-hidden {
 		display: none;
 	}
-	.nav-block {
-		display: flex;
-		flex-direction: column;
+	.nav-open {
+		width: 100%;
+
 		align-items: center;
 		background-color: #ffa101;
-		margin-top: 60px;
-		padding-top: 30px;
+		margin-top: 10px;
+		padding-top: 10px;
+		padding-bottom: 30px;
+		height: auto;
+		overflow-y: scroll;
+		overflow-x: hidden;
+
 	}
 
 	.nav-menu-logo-mobile {
-		width: 250px;
-		margin-left: 80px;
+		position: fixed;
+		top: 5px;
+		left: -50px;
+		background-image: url('../../../assets/logos/Logo1.png');
+		width: 40px;
+		height: 50px;
+		border-radius: 80px;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
 	}
 
 	.nav-icon {
 		width: 20px;
 	}
 
-	.client-menu-mobile-top {
-		position: fixed;
-		top: -100px;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		left: 10px;
+	.admin-menu-mobile-top {
+		margin-top: 15px;
+		margin-left: 5px;
 	}
+
+	.menu-admin-container {
+		max-width: 100vw;
+		overflow-y: scroll;
+	}
+	.admin-side-img{
+		display: none;
+	}
+	.admin-side-container{
+		text-align: center;
+	}
+	.admin-side-link a{
+		font-size: 20px;
+		padding: 10px 0 10px 10px;
+	}
+	.admin-side-link svg{
+		width:30px;
+		height: auto;
+
+	}
+
 }

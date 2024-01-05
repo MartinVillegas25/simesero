@@ -92,7 +92,7 @@ const mostrarMenu = async (req, res = response) => {
 const agregarProducto = async (req, res) => {
 	const emailUsuario = req.email;
 	try {
-		const { nombre, categoria, subcategoria, precio } = req.body;
+		const { nombre, categoria, subcategoria, precio, descripcion } = req.body;
 
 		let id_producto = uuidv4();
 
@@ -107,6 +107,10 @@ const agregarProducto = async (req, res) => {
 		} else {
 			img_url =
 				'https://res.cloudinary.com/dj3akdhb9/image/upload/v1695261911/samples/default-product-image_gqztb6.png';
+		}
+
+		if(!descripcion){
+			descripcion = '';
 		}
 
 		const queryCategoria =
@@ -149,7 +153,7 @@ const agregarProducto = async (req, res) => {
 			const sub = resultSubCategoria[0][0];
 			const cSubSeleccionada = sub.id_subcategoria;
 			const query =
-				'INSERT INTO items (img, nombre, id_categoria, id_subcategoria, precio, emailusuario, id_producto) VALUES (?, ?, ?, ?, ?, ?, ?)';
+				'INSERT INTO items (img, nombre, id_categoria, id_subcategoria, precio, emailusuario, id_producto, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 			const values = [
 				img_url,
 				nombre,
@@ -157,7 +161,8 @@ const agregarProducto = async (req, res) => {
 				cSubSeleccionada,
 				precio,
 				emailUsuario,
-				id_producto
+				id_producto,
+				descripcion
 			];
 
 			await pool.query(query, values);
@@ -344,10 +349,21 @@ const crearSubCategoria = async (req, res) => {
 			});
 		}
 
+		if (req.files) {
+			const { tempFilePath } = req.files.img;
+
+			const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
+
+			img_url = secure_url;
+		} else {
+			img_url =
+				'https://res.cloudinary.com/dj3akdhb9/image/upload/v1695261911/samples/default-product-image_gqztb6.png';
+		}
+
 		// Inserta la nueva subcategoría en la base de datos
 		const insertQuery =
-			'INSERT INTO subcategorias (nombre_subcategoria, id_categoria, emailusuario) VALUES (?, ?, ?)';
-		const insertValues = [subcategoria, idCategoria, emailUsuario];
+			'INSERT INTO subcategorias (nombre_subcategoria, id_categoria, emailusuario, img) VALUES (?, ?, ?, ?)';
+		const insertValues = [subcategoria, idCategoria, emailUsuario, img_url];
 
 		await pool.query(insertQuery, insertValues);
 		res.status(201).json({

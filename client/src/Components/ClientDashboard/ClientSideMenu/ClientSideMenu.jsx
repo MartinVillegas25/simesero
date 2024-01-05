@@ -4,7 +4,7 @@ import { MdMenuBook } from 'react-icons/md';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { VscSignOut } from 'react-icons/vsc';
 
-import logo from '../../../assets/logos/Logo1.png';
+import logo from '../../../assets/logos/Logo2.png';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { BsArrowRightCircle } from 'react-icons/bs';
