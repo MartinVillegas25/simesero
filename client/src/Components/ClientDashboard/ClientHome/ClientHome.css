@@ -118,6 +118,11 @@ table {
 .popup-content {
 	/* Agrega estilos personalizados para el contenido del pop-up si es necesario */
 }
+
+.alert-p {
+	font-size: 9px;
+	text-align: center;
+}
 @media only screen and (max-width: 1000px) {
 	.client-home-table-container {
 		overflow-x: scroll;

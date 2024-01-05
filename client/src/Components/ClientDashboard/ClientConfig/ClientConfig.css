@@ -1,5 +1,8 @@
 .client-config {
-	margin-top: 159px;
+	margin-top: 180px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 
 .backdrop {
@@ -22,21 +25,30 @@
 .h4-plan {
 	background-color: #fff;
 	color: #ffa101;
-	line-height: 120px;
+	width: 250px;
+	height: 250px;
 	text-transform: uppercase;
+	margin-bottom: 50px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 button {
 	cursor: pointer;
 }
 .client-config-container {
-	height: 300px;
+	height: 400px;
 	display: flex;
 	justify-content: space-around;
+	text-transform: uppercase;
 }
 .client-config-qr-container {
+	height: 400px;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	text-align: center;
+	margin-bottom: 50px;
 }
 
 .client-config-personal {
@@ -66,13 +78,14 @@ button {
 }
 
 .client-config-plan {
-	max-height: 300px;
+	height: 400px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
-	align-items: normal;
+	justify-content: space-between;
 	text-align: center;
+	margin-bottom: 50px;
 }
+
 .qr {
 	width: 221px;
 	height: 205px;
@@ -93,6 +106,11 @@ button {
 .client-config-btn:hover {
 	background-color: #fff;
 	color: #ffa101;
+}
+
+.client-config-qr {
+	width: 200px;
+	margin-bottom: 50px;
 }
 
 .client-config-qr-label {

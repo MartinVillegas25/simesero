@@ -23,6 +23,13 @@ export default function AllClientsTable() {
 	const validation = useSelector((state) => state.validation.msg);
 	const emailAddresses = allUsers.map((user) => user.email).join(';');
 
+	const [popUp, setPopUp] = useState(false);
+	const [selectedClientId, setSelectedClientId] = useState(null);
+	const handleOpenPopUp = (clientId) => {
+		setSelectedClientId(clientId);
+		setPopUp(!popUp);
+	};
+
 	const [pageLoaded, setPageLoaded] = useState(false);
 
 	const [clientEmail, setClientEmail] = useState('');
@@ -110,7 +117,7 @@ export default function AllClientsTable() {
 					<h1> Usted no tiene acceso</h1>
 				) : (
 					<main className="act-container">
-							<h2>
+						<h2>
 							TOTAL CLIENTES
 							<span className="total-clients">
 								{' '}
@@ -118,7 +125,7 @@ export default function AllClientsTable() {
 								{allUsers?.length}
 							</span>
 						</h2>
-						<div className='buscar'>
+						<div className="buscar">
 							<button>
 								<CiSearch />
 							</button>
@@ -127,11 +134,9 @@ export default function AllClientsTable() {
 								onChange={handleChange}
 								type="text"
 								placeholder="Buscar un cliente"
-								className='input-buscar'
+								className="input-buscar"
 							></input>
 						</div>
-
-					
 
 						<div className="act-table-container">
 							<div className="act-title">
@@ -173,6 +178,7 @@ export default function AllClientsTable() {
 										<th>Pago</th>
 										<th>Cambio Plan</th>
 										<th>Mensaje</th>
+										<th>Ver mas</th>
 										<th>Activar</th>
 										<th>Suspender</th>
 									</tr>
@@ -208,6 +214,11 @@ export default function AllClientsTable() {
 															</a>
 														</td>
 														<td>
+															<button onClick={() => handleOpenPopUp(c.id)}>
+																Ver
+															</button>
+														</td>
+														<td>
 															<button
 																value={c.email}
 																onClick={handleSubmitActivate}
@@ -231,67 +242,141 @@ export default function AllClientsTable() {
 										</>
 									) : (
 										<>
-											
-												{allUsers?.map((c) => {
-													return (
-														<tr key={c.id}>
-															<td>{c.storeName}</td>
-															<td>{c.date}</td>
-															<td>{c.plan}</td>
-															{c.status === 1 ? (
-																<td>
-																	<BsCheckCircle className="check-icon" />
-																</td>
-															) : (
-																<td>
-																	<BsXCircle className="X-icon" />
-																</td>
-															)}
-															<td>{c.cantidad_pedidos}</td>
-															{c.pagoConfirmado === 1 ? (
-																<td>SI</td>
-															) : (
-																<td>NO</td>
-															)}
-															{c.pagoCambioPlan === 1 ? (
-																<td>SI</td>
-															) : (
-																<td>NO</td>
-															)}
+											{allUsers?.map((c) => {
+												return (
+													<tr key={c.id}>
+														<td>{c.storeName}</td>
+														<td>{c.date}</td>
+														<td>{c.plan}</td>
+														{c.status === 1 ? (
 															<td>
-																<a
-																	href={`mailto:${c.email}`}
-																	target="_blank"
-																	rel="noreferrer"
-																>
-																	<VscMail className="mail-icon" />
-																</a>
+																<BsCheckCircle className="check-icon" />
 															</td>
+														) : (
 															<td>
-																<button
-																	value={c.email}
-																	onClick={handleSubmitActivate}
-																	className="status-btn-activate"
-																>
-																	Activar
-																</button>
+																<BsXCircle className="X-icon" />
 															</td>
-															<td>
-																<button
-																	value={c.email}
-																	onClick={handleSubmitSuspend}
-																	className="status-btn-suspend"
-																>
-																	Suspender
-																</button>
-															</td>
-														</tr>
-													);
-												})}
-											
+														)}
+														<td>{c.cantidad_pedidos}</td>
+														{c.pagoConfirmado === 1 ? <td>SI</td> : <td>NO</td>}
+														{c.pagoCambioPlan === 1 ? <td>SI</td> : <td>NO</td>}
+														<td>
+															<a
+																href={`mailto:${c.email}`}
+																target="_blank"
+																rel="noreferrer"
+															>
+																<VscMail className="mail-icon" />
+															</a>
+														</td>
+														<td>
+															<button onClick={() => handleOpenPopUp(c.id)}>
+																Ver
+															</button>
+														</td>
+														<td>
+															<button
+																value={c.email}
+																onClick={handleSubmitActivate}
+																className="status-btn-activate"
+															>
+																Activar
+															</button>
+														</td>
+														<td>
+															<button
+																value={c.email}
+																onClick={handleSubmitSuspend}
+																className="status-btn-suspend"
+															>
+																Suspender
+															</button>
+														</td>
+													</tr>
+												);
+											})}
 										</>
 									)}
 								</tbody>
+								{popUp && selectedClientId !== null && (
+									<div className="popup-background">
+										<div className="popup-container">
+											<span
+												className="popup-close"
+												onClick={() => handleOpenPopUp(null)}
+											>
+												&times;
+											</span>
+											<div className="popup-content">
+												<h3>Detalles del Cliente</h3>
+												<p>
+													Nombre:{' '}
+													{
+														allUsers.find(
+															(client) => client.id === selectedClientId
+														).name
+													}
+												</p>
+												<p>
+													Nombre del local:{' '}
+													{
+														allUsers.find(
+															(client) => client.id === selectedClientId
+														).storeName
+													}
+												</p>
+												<p>
+													Email:{' '}
+													{
+														allUsers.find(
+															(client) => client.id === selectedClientId
+														).email
+													}
+												</p>
+												<p>
+													Telefono:{' '}
+													{
+														allUsers.find(
+															(client) => client.id === selectedClientId
+														).telefono
+													}
+												</p>
+												<p>
+													Direccion:{' '}
+													{
+														allUsers.find(
+															(client) => client.id === selectedClientId
+														).address
+													}
+												</p>
+												<p>
+													Pais:{' '}
+													{
+														allUsers.find(
+															(client) => client.id === selectedClientId
+														).pais
+													}
+												</p>
+												<p>
+													Localidad:{' '}
+													{
+														allUsers.find(
+															(client) => client.id === selectedClientId
+														).localidad
+													}
+												</p>
+												<p>
+													Tipo de comercio:{' '}
+													{
+														allUsers.find(
+															(client) => client.id === selectedClientId
+														).tipo
+													}
+												</p>
+											</div>
+										</div>
+									</div>
+								)}
 							</table>
 							<div className="state-reference">
 								<div>

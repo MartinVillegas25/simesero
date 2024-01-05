@@ -122,6 +122,22 @@ export default function ClientSideMenu() {
 							)}
 						</div>
 					</div>
+					<div className="navbar-mail-links">
+						<a
+							href="mailto:sugerencias@simesero.com"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Sugerencias
+						</a>
+						<a
+							href="mailto:contacto@simesero.com"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Contacto
+						</a>
+					</div>
 				</aside>
 			) : (
 				<div className="sideMenuClosed"></div>
@@ -189,6 +205,7 @@ export default function ClientSideMenu() {
 							<VscSignOut />
 							<a href="/">Salir</a>
 						</div>
+
 						<div className="admin-side-img">
 							<img src={dataLocal?.img} alt="" />
 							<button onClick={handleOpenInput}>Cambiar imagen</button>
@@ -212,4 +229,3 @@ export default function ClientSideMenu() {
 		</div>
 	);
 }
-

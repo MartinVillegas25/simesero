@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 
 export default function Cart() {
 	const micart = useSelector((state) => state.productsAdeedToMinicart);
+
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 	const dispatch = useDispatch();

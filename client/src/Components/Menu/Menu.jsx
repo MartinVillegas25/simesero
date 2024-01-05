@@ -1,11 +1,11 @@
 import './Menu.css';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
 import { IoRestaurantSharp } from 'react-icons/io5';
-import { GiHotMeal } from "react-icons/gi";
+import { GiHotMeal } from 'react-icons/gi';
 import { BsFillChatDotsFill } from 'react-icons/bs';
-import { PiCallBell } from "react-icons/pi";
-import { TbReportMoney } from "react-icons/tb";
-import { MdFoodBank } from "react-icons/md";
+import { PiCallBell } from 'react-icons/pi';
+import { TbReportMoney } from 'react-icons/tb';
+import { MdFoodBank } from 'react-icons/md';
 
 import Products from './Products/Products';
 import Cart from './Cart/Cart';
@@ -14,9 +14,12 @@ import Chat from './Chat/Chat';
 import Pay from './Pay/Pay';
 
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Menu() {
 	const [selectedSection, setSelectedSection] = useState('products');
+	const micart = useSelector((state) => state.productsAdeedToMinicart);
+	const qProducts = micart?.length;
 
 	const handleSectionClick = (sectionId) => {
 		setSelectedSection(sectionId);
@@ -82,6 +85,11 @@ export default function Menu() {
 						className={selectedSection === 'cart' ? 'selected' : ''}
 					>
 						<GiHotMeal className="footer-icon" />
+						{qProducts === 0 ? (
+							<></>
+						) : (
+							<h4 className="q-products-nav">{qProducts}</h4>
+						)}
 					</a>
 					<a
 						href="#chat"

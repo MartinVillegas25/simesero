@@ -269,6 +269,9 @@ export default function ClientHome() {
 								</tbody>
 							</table>
 						</div>
+						<p className="alert-p">
+							Las alertas se eliminaran al recargar la pagina
+						</p>
 					</div>
 				</div>
 			</div>

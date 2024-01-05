@@ -28,8 +28,7 @@ export default function SubscribeModal({
 		telefono: '',
 		pais: '',
 		localidad: '',
-		tipo: '',
-		comentario: ''
+		tipo: ''
 	});
 
 	// Función para cargar los datos desde los input
@@ -104,8 +103,7 @@ export default function SubscribeModal({
 			telefono: '',
 			pais: '',
 			localidad: '',
-			tipo: '',
-			comentario: ''
+			tipo: ''
 		});
 		setRepeatPass('');
 		dispatch(handleCloseSubscribe);
@@ -176,8 +174,7 @@ export default function SubscribeModal({
 			telefono: '',
 			pais: '',
 			localidad: '',
-			tipo: '',
-			comentario: ''
+			tipo: ''
 		});
 		setRepeatPass('');
 		alert('usuario creado con exito');
@@ -233,7 +230,7 @@ export default function SubscribeModal({
 					<p>Completa los siguientes datos:</p>
 					<div className="subs-data">
 						<div className="subs-data-container">
-							<label htmlFor="">Nombre completo</label>
+							<label htmlFor="">Nombre completo*</label>
 							<input
 								type="text"
 								name="name"
@@ -241,7 +238,7 @@ export default function SubscribeModal({
 								value={input.name}
 								onChange={handleChange}
 							/>
-							<label htmlFor="">Nombre del local</label>
+							<label htmlFor="">Nombre del local*</label>
 							<input
 								type="text"
 								name="storeName"
@@ -249,7 +246,7 @@ export default function SubscribeModal({
 								value={input.storeName}
 								onChange={handleChange}
 							/>
-							<label htmlFor="">Direccion</label>
+							<label htmlFor="">Direccion*</label>
 							<input
 								type="text"
 								name="address"
@@ -257,7 +254,7 @@ export default function SubscribeModal({
 								value={input.address}
 								onChange={handleChange}
 							/>
-							<label htmlFor="">Codigo postal</label>
+							<label htmlFor="">Codigo postal*</label>
 							<input
 								type="number"
 								name="cp"
@@ -274,7 +271,7 @@ export default function SubscribeModal({
 								value={input.img}
 								onChange={handleChange}
 							/>
-							<label htmlFor="">Telefono</label>
+							<label htmlFor="">Telefono*</label>
 							<input
 								type="number"
 								name="telefono"
@@ -282,7 +279,7 @@ export default function SubscribeModal({
 								value={input.telefono}
 								onChange={handleChange}
 							/>
-							<label htmlFor="">País</label>
+							<label htmlFor="">País*</label>
 							<input
 								type="text"
 								name="pais"
@@ -290,7 +287,7 @@ export default function SubscribeModal({
 								value={input.pais}
 								onChange={handleChange}
 							/>
-							<label htmlFor="">Localidad</label>
+							<label htmlFor="">Localidad*</label>
 							<input
 								type="text"
 								name="localidad"
@@ -298,15 +295,8 @@ export default function SubscribeModal({
 								value={input.localidad}
 								onChange={handleChange}
 							/>
-							<label htmlFor="">Comentario</label>
-							<input
-								type="text"
-								name="comentario"
-								className="subs-input"
-								value={input.comentario}
-								onChange={handleChange}
-							/>
-							<label htmlFor="">Tipo de comercio</label>
+
+							<label htmlFor="">Tipo de comercio*</label>
 							<div className="subs-plan">
 								<select name="tipo" onClick={handleChange}>
 									<option value="">-</option>

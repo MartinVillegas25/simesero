@@ -25,6 +25,7 @@ export default function Products() {
 
 	const categories = useSelector((state) => state.menuCategories.categorias);
 	const products = useSelector((state) => state.localProducts);
+
 	// Funcion para mostrar solo los productos correspondientes a la categoria seleccionada
 	const handleCategorySelection = (categoryName) => {
 		setSelectedCategory(categoryName);
@@ -91,16 +92,16 @@ export default function Products() {
 															: ''
 													}`}
 												>
+													<div className="product-info">
+														<p className="product-name">{producto.nombre}</p>
+														<p className="product-price">${producto.precio}</p>
+													</div>
 													<div>
 														<img
 															src={producto.img}
 															alt={producto.nombre}
 															className="product-img"
 														/>
-													</div>
-													<div className="product-info">
-														<p className="product-name">{producto.nombre}</p>
-														<p className="product-price">${producto.precio}</p>
 													</div>
 													<div className="product-add">
 														<button

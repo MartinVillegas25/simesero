@@ -10,19 +10,25 @@ import './ClientConfig.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import swal from 'sweetalert';
+import QrSiMesero from '../../../assets/QrSiMesero.png';
 
 export default function ClientConfig() {
 	// Datos del usuario
 	const user = useSelector((state) => state.localData.usuario);
+	console.log(user);
 	// Precio de planes
 	const plans = useSelector((state) => state.plans);
 
 	useEffect(() => {
 		if (user) {
 			setInput({
+				name: user.name,
 				storeName: user.storeName,
 				telefono: user.telefono,
-				address: user.address
+				address: user.address,
+				pais: user.pais,
+				localidad: user.localidad,
+				tipo: user.tipo
 			});
 		}
 	}, [user]);
@@ -33,9 +39,13 @@ export default function ClientConfig() {
 	const dispatch = useDispatch();
 
 	const [input, setInput] = useState({
+		name: '',
 		storeName: '',
+		telefono: '',
 		address: '',
-		telefono: ''
+		pais: '',
+		localidad: '',
+		tipo: ''
 	});
 
 	const [popUpOpen, setPopUpOpen] = useState(false);
@@ -120,46 +130,83 @@ export default function ClientConfig() {
 
 	return (
 		<main className="client-config">
-			<div className={popUpOpen === true ? ' backdrop' : ''}>
-				<div
-					className={popUpOpen === true ? 'client-data-popup' : 'popup-hidden'}
-				>
-					<div className="client-data-popup-container">
-						<div className="client-data-popup-btn">
-							<button onClick={handlepopUp}>X</button>
+			<div>
+				<div className={popUpOpen === true ? ' backdrop' : ''}>
+					<div
+						className={
+							popUpOpen === true ? 'client-data-popup' : 'popup-hidden'
+						}
+					>
+						<div className="client-data-popup-container">
+							<div className="client-data-popup-btn">
+								<button onClick={handlepopUp}>X</button>
+							</div>
+							<h3>Modificar datos</h3>
+							<label htmlFor="">Nombre</label>
+							<input
+								type="text"
+								name="name"
+								value={input.name}
+								onChange={handleChangeData}
+							/>
+							<label htmlFor="">Nombre del local:</label>
+							<input
+								type="text"
+								name="storeName"
+								value={input.storeName}
+								onChange={handleChangeData}
+							/>
+							<label htmlFor="">Direccion:</label>
+							<input
+								type="text"
+								name="address"
+								value={input.address}
+								onChange={handleChangeData}
+							/>
+							<label htmlFor="">Telefono</label>
+							<input
+								type="text"
+								name="telefono"
+								value={input.telefono}
+								onChange={handleChangeData}
+							/>
+							<label htmlFor="">Pais</label>
+							<input
+								type="text"
+								name="pais"
+								value={input.pais}
+								onChange={handleChangeData}
+							/>
+							<label htmlFor="">Localidad</label>
+							<input
+								type="text"
+								name="localidad"
+								value={input.localidad}
+								onChange={handleChangeData}
+							/>
+							<label htmlFor="">Tipo de comercio</label>
+							<select name="tipo" onClick={handleChangeData}>
+								<option value="">-</option>
+								<option value="cafe">Café</option>
+								<option value="restaurant">Restaurante</option>
+								<option value="bar">Bar</option>
+								<option value="hotel">Hotel</option>
+								<option value="otro">Otro</option>
+							</select>
+
+							<button className="submit-btn" onClick={handleSubmitData}>
+								Modificar
+							</button>
 						</div>
-						<h3>Modificar datos</h3>
-						<label htmlFor="">Nuevo nombre del local:</label>
-						<input
-							type="text"
-							name="storeName"
-							value={input.storeName}
-							onChange={handleChangeData}
-						/>
-						<label htmlFor="">Nueva direccion:</label>
-						<input
-							type="text"
-							name="address"
-							value={input.address}
-							onChange={handleChangeData}
-						/>
-						<label htmlFor="">Nuevo telefono</label>
-						<input
-							type="text"
-							name="telefono"
-							value={input.telefono}
-							onChange={handleChangeData}
-						/>
-						<button className="submit-btn" onClick={handleSubmitData}>
-							Modificar
-						</button>
 					</div>
 				</div>
-			</div>
-			<div>
+
 				<div className="client-config-container">
 					<div className="client-config-personal">
 						<h3>Datos Personales</h3>
+						<h4>
+							Nombre : <span>{user?.name}</span>
+						</h4>
 						<h4>
 							Nombre del local: <span>{user?.storeName}</span>
 						</h4>
@@ -172,26 +219,37 @@ export default function ClientConfig() {
 						<h4>
 							Mail: <span>{user?.email}</span>
 						</h4>
+						<h4>
+							Pais: <span>{user?.pais}</span>
+						</h4>
+						<h4>
+							Localidad: <span>{user?.localidad}</span>
+						</h4>
+						<h4>
+							Tipo de comercio: <span>{user?.tipo}</span>
+						</h4>
 						<button className="client-config-btn" onClick={handlepopUp}>
 							Modificar datos
 						</button>
 					</div>
+				</div>
+			</div>
 
-					<div className="client-config-plan">
-						<h3>Plan adquirido</h3>
-						<h4 className="h4-plan">{user?.plan}</h4>
-						<button className="client-config-btn" onClick={handlePlanPopUp}>
-							Actualizar plan
-						</button>
-					</div>
-				</div>
-				<div className="client-config-qr-container">
-					<a
-						href={`https://simesero-cadf72616f17.herokuapp.com/dashboard/qrgenerator?email=${userEmail}`}
-					>
-						<button className="client-config-btn">Generar codigos Qr</button>
-					</a>
-				</div>
+			<div className="client-config-plan">
+				<h3>Plan adquirido</h3>
+				<h4 className="h4-plan">{user?.plan}</h4>
+				<button className="client-config-btn" onClick={handlePlanPopUp}>
+					Actualizar plan
+				</button>
+			</div>
+			<div className="client-config-qr-container">
+				<h3>Generador de Qr</h3>
+				<img src={QrSiMesero} alt="" className="client-config-qr" />
+				<a
+					href={`https://simesero-cadf72616f17.herokuapp.com/dashboard/qrgenerator?email=${userEmail}`}
+				>
+					<button className="client-config-btn">Generar codigos Qr</button>
+				</a>
 			</div>
 			<div className={planPopUpOpen === true ? ' backdrop' : ''}></div>
 			<div
@@ -223,13 +281,13 @@ export default function ClientConfig() {
 							</div>
 							{/* <div>
 								<a
-									// eslint-disable-next-line react/no-unknown-property
-									mp-mode="dftl"
-									href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848ae746f0018af1220de80617"
-									name="MP-payButton"
-									className="subs-btn-newPlan"
+								// eslint-disable-next-line react/no-unknown-property
+								mp-mode="dftl"
+								href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848ae746f0018af1220de80617"
+								name="MP-payButton"
+								className="subs-btn-newPlan"
 								>
-									Continuar a pago
+								Continuar a pago
 								</a>
 							</div> */}
 
@@ -262,7 +320,7 @@ export default function ClientConfig() {
 										// !!!!!!!!FUNCTION_CALLBACK HERE Received message: {event.data} preapproval_id !!!!!!!!
 									}
 									window.$MPC_loaded !== true ?
-									(window.addEventListener("message", $MPC_message)) : null;  */}
+								(window.addEventListener("message", $MPC_message)) : null;  */}
 							</script>
 						</div>
 					) : newPlan === 'basic' ? (
@@ -286,7 +344,7 @@ export default function ClientConfig() {
 								href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848af994d0018b02039da906a5"
 								name="MP-payButton"
 								className="subs-btn-newPlan"
-							>
+								>
 								Continuar a pago
 							</a> */}
 							<script type="text/javascript">
@@ -315,7 +373,7 @@ export default function ClientConfig() {
 								{/*
         // to receive event with message when closing modal from congrants back to site
         function $MPC_message(event) {
-          // onclose modal ->CALLBACK FUNCTION
+			// onclose modal ->CALLBACK FUNCTION
          // !!!!!!!!FUNCTION_CALLBACK HERE Received message: {event.data} preapproval_id !!!!!!!!
         }
         window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null;
@@ -327,12 +385,11 @@ export default function ClientConfig() {
 					)}
 				</div>
 			</div>
-			<div className="precios-planes">
+			{/* <div className="precios-planes">
 				<p>Basico: Gratuito</p>
 				<p>Estandar: ${plans.standard}</p>
 				<p>Premuim: ${plans.premium}</p>
-				<a className="navbar-link" href="mailto:contacto@simesero.com">Sugerencias</a>
-			</div>
+			</div> */}
 		</main>
 	);
 }
