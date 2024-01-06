@@ -1,5 +1,5 @@
 .client-home-container {
-	margin-top: 50px;
+	margin-top: 159px;
 	display: flex;
 	flex-direction: column;
 	margin-left: 30px;
@@ -78,9 +78,13 @@ table {
 	border-spacing: 0;
 	border-collapse: collapse;
 }
+.client-home-alerts table {
+	overflow-y: scroll;
+}
 .client-home-container span {
 	text-transform: uppercase;
 }
+
 /* Estilo para el pop-up */
 .popup-container {
 	position: fixed;
@@ -119,9 +123,13 @@ table {
 	/* Agrega estilos personalizados para el contenido del pop-up si es necesario */
 }
 
-.alert-p {
-	font-size: 9px;
-	text-align: center;
+.client-home-alerts-active table {
+	max-height: 400px;
+	overflow-y: scroll;
+}
+.client-home-alerts-active {
+	max-height: 400px;
+	overflow-y: scroll;
 }
 @media only screen and (max-width: 1000px) {
 	.client-home-table-container {
@@ -131,5 +139,32 @@ table {
 @media only screen and (max-width: 768px) {
 	.client-home {
 		display: block;
+	}
+	.client-home-table {
+		overflow-x: scroll;
+		min-height: 300px;
+		max-height: 500px;
+		overflow-y: scroll;
+		border: 1px solid #f1f1f1;
+		max-width: 250px;
+	}
+	.client-home-container th {
+		min-width: 120px;
+		background-color: #f1f1f1;
+		height: 50px;
+		color: #000;
+	}
+	.client-home-table-container {
+		border: 1px solid #f1f1f1;
+		width: 90vw;
+		max-width: 350px;
+		margin-bottom: 40px;
+	}
+	.client-home-container {
+		margin-top: 50px;
+	}
+	.client-home-alerts {
+		width: 90vw;
+		max-width: 350px;
 	}
 }

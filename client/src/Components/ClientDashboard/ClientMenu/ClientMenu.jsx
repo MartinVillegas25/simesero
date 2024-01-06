@@ -29,6 +29,7 @@ export default function ClientMenu() {
 	const categories = useSelector((state) => state.localCategories.categorias);
 
 	const [newCategory, setNewCategory] = useState('');
+	const [subcategImg, setSubcategImg] = useState('');
 
 	const handleChangeCategory = (e) => {
 		setNewCategory(e.target.value.toUpperCase());
@@ -89,13 +90,17 @@ export default function ClientMenu() {
 		(state) => state.localSubcategories.subcategorias
 	);
 
+	const handleSubcategImg = (e) => {
+		setSubcategImg(e.target.value);
+	};
+
 	const handleCreateSubCategory = () => {
-		dispatch(
-			createSubCategory({
-				subcategoria: newSubCategory,
-				categoria: categorySelected
-			})
-		);
+		const formData = new FormData();
+		formData.append('subcategoria', newSubCategory);
+		formData.append('categoria', categorySelected);
+		formData.append('img', subcategImg);
+		dispatch(createSubCategory(formData));
+
 		setCategorySelected('');
 		setNewCategory('');
 
@@ -114,6 +119,7 @@ export default function ClientMenu() {
 		categoria: '',
 		subcategoria: '',
 		precio: 0,
+		descripcion: '',
 		img: null
 	});
 
@@ -130,7 +136,7 @@ export default function ClientMenu() {
 
 	const handleCreateProdcut = (e) => {
 		e.preventDefault();
-		
+
 		if (categorySelected === '') {
 			alert('Debe seleccionar una categoria');
 			return;
@@ -155,6 +161,7 @@ export default function ClientMenu() {
 				formData.append('img', input.img);
 				formData.append('categoria', input.categoria);
 				formData.append('subcategoria', input.subcategoria);
+				formData.append('descripcion', input.descripcion);
 				console.log(input);
 				dispatch(createProduct(formData));
 				swal({
@@ -281,18 +288,29 @@ export default function ClientMenu() {
 							))}
 						</select>{' '}
 					</div>
-					<label htmlFor="">Añadir sub categoria: </label>
-					<div className="section-form">
+					<label htmlFor="">Nombre nueva sub categoria: </label>
+
+					<div className="create-menu-input">
 						<input
 							type="text"
 							className="add-subC-input"
 							value={newSubCategory}
 							onChange={handleChangeSubCategory}
 						/>
-						<button className="btn-agregar" onClick={handleCreateSubCategory}>
-							<span>
-								<MdAddCircle className="create-menu-add-icon" />
-							</span>
+
+						<label htmlFor="">Imagen de nueva subcategoria:</label>
+						<p className="max-length-input">*Formato .jpg/.png</p>
+						<input
+							type="file"
+							id="newImg"
+							accept="img/*"
+							onChange={handleSubcategImg}
+						/>
+						<button
+							className="create-menu-add-subcateg"
+							onClick={handleCreateSubCategory}
+						>
+							<span>Agregar</span>
 						</button>
 					</div>
 
@@ -361,11 +379,13 @@ export default function ClientMenu() {
 					</div>
 					<div className="create-menu-input">
 						<label htmlFor="">Nombre:</label>
+						<p className="max-length-input">*Maximo 40 caracteres</p>
 						<input
 							type="text"
 							name="nombre"
 							value={input.nombre}
 							onChange={handleChange}
+							maxLength={40}
 						/>
 					</div>
 					<div className="create-menu-input">
@@ -378,7 +398,19 @@ export default function ClientMenu() {
 						/>
 					</div>
 					<div className="create-menu-input">
+						<label htmlFor="">Descripcion: </label>
+						<p className="max-length-input">*Maximo 50 caracteres</p>
+						<input
+							type="text"
+							name="descripcion"
+							value={input.descripcion}
+							onChange={handleChange}
+							maxLength={50}
+						/>
+					</div>
+					<div className="create-menu-input">
 						<label htmlFor="">Imagen:</label>
+						<p className="max-length-input">*Formato .jpg/.png</p>
 						<input
 							type="file"
 							id="newImg"

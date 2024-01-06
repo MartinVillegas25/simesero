@@ -23,6 +23,7 @@ export default function ClientMenuConfig() {
 		dispatch(getProducts(email));
 	}, []);
 	const products = useSelector((state) => state.localProducts);
+	console.log(products);
 
 	const categories = useSelector((state) => state.menuCategories.categorias);
 
@@ -150,6 +151,7 @@ export default function ClientMenuConfig() {
 											<h2 className="subcategory-title">
 												{subcategoria.subcategoria}
 											</h2>
+											<img src={subcategoria.img} alt="" />
 											<ul className="products-list">
 												{subcategoria.productos.map((producto, prodIndex) => (
 													<li

@@ -25,6 +25,7 @@ export default function Products() {
 
 	const categories = useSelector((state) => state.menuCategories.categorias);
 	const products = useSelector((state) => state.localProducts);
+	console.log(products);
 
 	// Funcion para mostrar solo los productos correspondientes a la categoria seleccionada
 	const handleCategorySelection = (categoryName) => {
@@ -82,6 +83,11 @@ export default function Products() {
 										<h2 className="subcategory-title">
 											{subcategoria.subcategoria}
 										</h2>
+										<img
+											src={subcategoria.img}
+											alt=""
+											className="product-img"
+										/>
 										<ul className="products-list">
 											{subcategoria.productos.map((producto, prodIndex) => (
 												<li
@@ -95,6 +101,9 @@ export default function Products() {
 													<div className="product-info">
 														<p className="product-name">{producto.nombre}</p>
 														<p className="product-price">${producto.precio}</p>
+														<p className="product-name">
+															{producto.descripcion}
+														</p>
 													</div>
 													<div>
 														<img

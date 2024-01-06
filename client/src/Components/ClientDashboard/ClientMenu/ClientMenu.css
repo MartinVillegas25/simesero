@@ -121,6 +121,23 @@
 	overflow-x: scroll;
 }
 
+.create-menu-add-subcateg {
+	display: flex;
+	width: 100%;
+	max-width: 200px;
+	margin: 20px auto;
+	padding: 10px 35px;
+	background-color: #fff;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.create-menu-add-subcateg:hover {
+	background-color: #ffa101;
+}
+.create-menu-add-subcateg:hover span {
+	color: #fff;
+}
+
 .menu-mobile-admin-btn {
 	margin-bottom: 20px;
 	width: 71px;
@@ -155,21 +172,25 @@
 }
 
 /*editar productos*/
-.product-edit-popup input{
-    background: #fff;
+.product-edit-popup input {
+	background: #fff;
 }
-.product-edit-popup label{
-    font-weight: 700;
+.product-edit-popup label {
+	font-weight: 700;
 }
-.product-edit-popup button{
-    background: orange;
-    border:none;
-    color:#fff;
-    padding: 3px 10px;
-    border-radius: 2px;
-    margin-bottom: 4px;
-    margin-top: 3px;
+.product-edit-popup button {
+	background: orange;
+	border: none;
+	color: #fff;
+	padding: 3px 10px;
+	border-radius: 2px;
+	margin-bottom: 4px;
+	margin-top: 3px;
 }
-.product-edit-popup{
-    text-align: center;
+.product-edit-popup {
+	text-align: center;
+}
+
+.max-length-input {
+	font-size: smaller;
 }
