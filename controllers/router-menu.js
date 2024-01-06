@@ -21,7 +21,8 @@ const mostrarMenu = async (req, res = response) => {
         i.id_producto,
         i.img,
         i.nombre,
-        i.precio
+        i.precio,
+		i.descripcion
       FROM
         categorias AS c
       LEFT JOIN
@@ -59,6 +60,7 @@ const mostrarMenu = async (req, res = response) => {
 					result[categoriaIndex].subcategorias.push({
 						subcategoria_id: row.subcategoria_id,
 						subcategoria: row.subcategoria,
+						imgsubcategoria: row.img,
 						productos: []
 					});
 					subcategoriaIndex = result[categoriaIndex].subcategorias.length - 1;
@@ -69,7 +71,8 @@ const mostrarMenu = async (req, res = response) => {
 					id: row.id_producto,
 					img: row.img,
 					nombre: row.nombre,
-					precio: row.precio
+					precio: row.precio,
+					descripcion: row.descripcion
 				});
 			} else {
 				// Si no tiene subcategoría, agrega el producto directamente a la categoría
@@ -92,8 +95,8 @@ const mostrarMenu = async (req, res = response) => {
 const agregarProducto = async (req, res) => {
 	const emailUsuario = req.email;
 	try {
-		const { nombre, categoria, subcategoria, precio, descripcion } = req.body;
-
+		let { nombre, categoria, subcategoria, precio, descripcion } = req.body;
+		console.log(nombre, categoria, subcategoria, precio, descripcion);
 		let id_producto = uuidv4();
 
 		//agregar imagen a cloudinary para obterner url
@@ -112,6 +115,8 @@ const agregarProducto = async (req, res) => {
 		if(!descripcion){
 			descripcion = '';
 		}
+		console.log(nombre, categoria, subcategoria, precio, descripcion);
+
 
 		const queryCategoria =
 			'SELECT id_categoria FROM categorias WHERE nombre_categoria = ? AND emailusuario = ?';
