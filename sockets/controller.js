@@ -123,7 +123,9 @@ const socketController = (socket, io) => {
 			console.log(mensaje);
 			callback(mensaje);
 		});
-
+	socket.on('disconnect', () => {
+			console.log('disconnect');
+		});
 		// socket.on('disconnect', () => {
 		// 	let personaBorrada = usuarios.borrarPersona(socket.id);
 

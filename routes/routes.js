@@ -182,7 +182,7 @@ router.post('/dashboard/newsubcategoria', [validarJWT], crearSubCategoria);
 
 //manejos de pedidos local
 
-router.get('/dashboard/pedidos', mostrarPedidos);
+router.get('/dashboard/pedidos', [validarJWT], mostrarPedidos);
 router.delete('/liberar-pedido', [validarJWT], liberarPedido);
 
 //chat local

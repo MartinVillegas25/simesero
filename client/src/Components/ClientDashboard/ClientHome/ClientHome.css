@@ -84,6 +84,7 @@ table {
 .client-home-container span {
 	text-transform: uppercase;
 }
+
 /* Estilo para el pop-up */
 .popup-container {
 	position: fixed;
@@ -120,6 +121,15 @@ table {
 /* Estilo para el contenido del pop-up */
 .popup-content {
 	/* Agrega estilos personalizados para el contenido del pop-up si es necesario */
+}
+
+.client-home-alerts-active table{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.client-home-alerts-active{
+    max-height: 400px;
+    overflow-y: scroll; 
 }
 @media only screen and (max-width:1000px){
     .client-home-table-container{

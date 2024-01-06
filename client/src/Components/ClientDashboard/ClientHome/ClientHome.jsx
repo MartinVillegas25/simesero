@@ -81,6 +81,30 @@ export default function ClientHome() {
 				handleNewAlert();
 				document.getElementById('lblTicket4').innerText = payload[email][3];
 			}
+			if (payload[email][4]) {
+				handleNewAlert();
+				document.getElementById('lblTicket5').innerText = payload[email][4];
+			}
+			if (payload[email][5]) {
+				handleNewAlert();
+				document.getElementById('lblTicket6').innerText = payload[email][5];
+			}
+			if (payload[email][6]) {
+				handleNewAlert();
+				document.getElementById('lblTicket7').innerText = payload[email][6];
+			}
+			if (payload[email][7]) {
+				handleNewAlert();
+				document.getElementById('lblTicket8').innerText = payload[email][7];
+			}
+			if (payload[email][8]) {
+				handleNewAlert();
+				document.getElementById('lblTicket9').innerText = payload[email][8];
+			}
+			if (payload[email][9]) {
+				handleNewAlert();
+				document.getElementById('lblTicket10').innerText = payload[email][9];
+			}
 		});
 
 		// Actualizar los datos de la tabla cada un minuto
@@ -264,6 +288,60 @@ export default function ClientHome() {
 												className="ticket-secundario"
 											></span>
 											<span id="lblEscritorio4"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span
+												id="lblTicket5"
+												className="ticket-secundario"
+											></span>
+											<span id="lblEscritorio5"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span
+												id="lblTicket6"
+												className="ticket-secundario"
+											></span>
+											<span id="lblEscritorio6"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span
+												id="lblTicket7"
+												className="ticket-secundario"
+											></span>
+											<span id="lblEscritorio7"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span
+												id="lblTicket8"
+												className="ticket-secundario"
+											></span>
+											<span id="lblEscritorio8"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span
+												id="lblTicket9"
+												className="ticket-secundario"
+											></span>
+											<span id="lblEscritorio9"></span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<span
+												id="lblTicket10"
+												className="ticket-secundario"
+											></span>
+											<span id="lblEscritorio10"></span>
 										</td>
 									</tr>
 								</tbody>

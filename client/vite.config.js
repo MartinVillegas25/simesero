@@ -7,9 +7,12 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/socket.io': {
-				target: 'http://localhost:3002/',
+				target: 'http://localhost:3002',
 				changeOrigin: true,
-				ws: true
+				ws: true,
+				onError: (err) => {
+					console.error('Error en el proxy:', err);
+				},
 			}
 		}
 	},

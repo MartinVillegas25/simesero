@@ -73,8 +73,7 @@ CREATE TABLE items (
 )
 
 ALTER TABLE items
-ADD id_producto varchar(100) NOT NULL;
-ADD descripcion varchar(50) NULL
+ADD descripcion varchar(100) NULL
 
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
@@ -92,6 +91,8 @@ CREATE TABLE subcategorias (
     FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria) ON DELETE CASCADE;
 )
 ALTER TABLE subcategorias ADD img VARCHAR(200) NULL,
+
+
 CREATE TABLE pedidos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   mesa INT NOT NULL,

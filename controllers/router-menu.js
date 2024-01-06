@@ -553,8 +553,9 @@ const mostrarsubCategoriasMenu = async (req, res) => {
 //ruta mostrar pedidos
 
 const mostrarPedidos = async (req, res) => {
+	console.log('entro a pedidos');
 	const emailUsuario = req.email;
-	console.log(emailUsuario);
+	console.log('email', emailUsuario);
 
 	const query = 'SELECT * FROM pedidos WHERE usuario_email = ?';
 	try {
