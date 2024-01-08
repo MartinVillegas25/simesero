@@ -25,6 +25,8 @@ export default function Products() {
 
 	const categories = useSelector((state) => state.menuCategories.categorias);
 	const products = useSelector((state) => state.localProducts);
+	console.log(products);
+
 	// Funcion para mostrar solo los productos correspondientes a la categoria seleccionada
 	const handleCategorySelection = (categoryName) => {
 		setSelectedCategory(categoryName);
@@ -78,9 +80,17 @@ export default function Products() {
 								<h2 className="category-title">{categoria.categoria}</h2>
 								{categoria.subcategorias.map((subcategoria, subIndex) => (
 									<div key={subcategoria.subcategoria_id + subIndex}>
+										<div className='subcategoria'>
 										<h2 className="subcategory-title">
 											{subcategoria.subcategoria}
 										</h2>
+										<img
+											src={subcategoria.img}
+											alt=""
+											className="subcategoria-img"
+										/>
+										</div>
+										
 										<ul className="products-list">
 											{subcategoria.productos.map((producto, prodIndex) => (
 												<li
@@ -91,18 +101,19 @@ export default function Products() {
 															: ''
 													}`}
 												>
+													<div className="product-info">
+														<p className="product-name">{producto.nombre}</p>
+														<p className="product-price">${producto.precio}</p>
+														<p className="product-name">
+															{producto.descripcion}
+														</p>
+													</div>
 													<div>
 														<img
 															src={producto.img}
 															alt={producto.nombre}
 															className="product-img"
 														/>
-													</div>
-													<div className="product-info">
-														<p className="product-name">{producto.nombre}</p>
-														<p className="product-price">
-															Precio: ${producto.precio}
-														</p>
 													</div>
 													<div className="product-add">
 														<button

@@ -5,7 +5,8 @@ import { GiHotMeal } from "react-icons/gi";
 import { BsFillChatDotsFill } from 'react-icons/bs';
 import { PiCallBell } from "react-icons/pi";
 import { TbReportMoney } from "react-icons/tb";
-import { MdFoodBank } from "react-icons/md";
+import { MdOutlineFoodBank } from "react-icons/md";
+
 
 import Products from './Products/Products';
 import Cart from './Cart/Cart';
@@ -29,7 +30,7 @@ export default function Menu() {
 					<div>
 						<IoRestaurantSharp className="menu-dec-logo" />
 					</div>
-					<div className="menu-logo"></div>
+					
 					<div>
 						<MdOutlineNotificationsNone className="menu-notification-logo" />
 					</div>
@@ -74,7 +75,7 @@ export default function Menu() {
 						onClick={() => handleSectionClick('products')}
 						className={selectedSection === 'products' ? 'selected' : ''}
 					>
-						<MdFoodBank className="footer-icon" />
+						<MdOutlineFoodBank className="footer-icon" />
 					</a>
 					<a
 						href="#cart"

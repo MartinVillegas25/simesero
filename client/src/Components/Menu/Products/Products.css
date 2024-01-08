@@ -1,3 +1,38 @@
+/*menu comensal estilo*/
+.menu-mobile-admin-btn{
+    margin:0 5px;
+    width:auto;
+    min-width:100px; 
+    padding: 5px 15px;
+    border:none;
+    font-weight: 300;
+    text-transform: capitalize;
+    
+}
+.product-add button{
+    background-color: rgb(49,192,49);
+    border:1px solid rgb(49,192,49);
+    color:#fff;
+}
+
+.footer-container{
+    background-color: #ffa101;
+    
+}
+footer{
+    background-color: #ffa101;
+    border-radius: 0;
+}
+.footer-container path{
+	filter: invert(1);
+}
+.menu-container{
+    background-color: #fff;
+}
+.products-container{
+    background-color: #fff;
+}
+
 .products-container {
 	padding-top: 20px;
 	padding-bottom: 200px;
@@ -35,25 +70,15 @@
 .category-title {
 	color: #000;
 
-	font-size: 16px;
+	font-size: 20px;
 	font-style: normal;
-	font-weight: 700;
+	font-weight: 300;
 	line-height: normal;
 	margin-left: 20px;
+	text-transform: uppercase;
 }
 
 /* Estilo para cada subcategoría */
-.subcategory-title {
-	color: #000;
-
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: normal;
-	text-align: start;
-	margin-left: 50px;
-}
-
 /* Estilo para la lista de productos */
 .products-list {
 	list-style: none;
@@ -131,7 +156,65 @@
 	background: #ffa101;
 	color: #fff; /* Cambia esto al color deseado */
 }
-
 .confirmation-symbol {
 	background-color: #00800021;
+}
+.q-products {
+	position: fixed;
+	top: 80px;
+	right: 20px;
+	color: #000;
+	border: solid 1px black;
+	background-color: green;
+	padding: 8px;
+	border-radius: 50%;
+}
+
+.product-container div{
+	display: flex;
+	align-items: center;
+}
+div.product-info p{
+	margin: 0;
+	text-align: left;
+}
+p.product-price{
+	width: 116px;
+    text-align: left;
+}
+
+li.product-container:nth-child(odd){
+	background-color: #f1f1f1;
+
+}
+li.product-container{
+	padding: 15px 0;
+}
+
+/*img subcategoria*/
+div.subcategoria{
+	position: relative;
+	height: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+div.subcategoria img.subcategoria-img{
+	width: 100%;
+	height: 100%;
+	max-height: 70px;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+h2.subcategory-title{
+	
+	font-weight: 200;
+	text-transform: uppercase;
+	margin: auto;
+	color:#000;
+	font-size: 18px;
+	
 }

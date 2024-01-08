@@ -102,10 +102,11 @@ class TicketControl {
     }
     
     // Nuevo método para enviar la cuenta
-    guardarPedirCuenta(email, mesa, nombre, metodo) {
+    guardarPedirCuenta(email, mesa, nombre, metodo, dividir) {
         const ticket = new Ticket(mesa, email);
         ticket.nombre = nombre;
         ticket.metodo = metodo;
+        ticket.dividir = dividir
         this.mesas.push(ticket);
         this.guardarDB();
         return ticket;
@@ -113,7 +114,7 @@ class TicketControl {
 
 
     // Nuevo método para pedir cuenta
-    pedirCuenta(mesa, nombre, email, metodo) {
+    pedirCuenta(mesa, nombre, email, metodo, dividir) {
         
         // const ticket = this.mesas.shift(); // this.tickets[0];
         // ticket.mesa = `Cuenta en mesa ${mesa}, ${nombre}`; 
@@ -129,7 +130,7 @@ class TicketControl {
         const hora = horaActual.getHours();
         const minutos = horaActual.getMinutes(); 
         const ticket = this.mesas.shift();
-        ticket.mesa = `${hora}:${minutos} Cuenta en mesa ${mesa} \n ${nombre}, ${metodo}`;
+        ticket.mesa = `${hora}:${minutos} Cuenta en mesa ${mesa} \n ${nombre}, ${metodo}, ${dividir}`;
 
         this.agregarEventoSala(email, ticket.mesa);
 

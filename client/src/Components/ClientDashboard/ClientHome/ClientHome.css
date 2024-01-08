@@ -16,7 +16,7 @@
 	min-width: 50vw;
 }
 .client-home-table-container {
-	max-height: 400px;
+	
 	overflow-y: scroll;
 	margin-right: 50px;
 }
@@ -47,16 +47,12 @@
 
 .client-home-alerts {
 	height: 100%;
-	width: 200px;
 
-	max-height: 600px;
-	min-height: 400px;
+
+	
 	border: solid 2px orange;
 }
-.client-home-alerts-active {
-	height: 400px;
-	width: 200px;
-	max-height: 400px;
+.client-home-alerts-active {	
 	border: solid 6px greenyellow;
 	color: greenyellow;
 }
@@ -124,12 +120,43 @@ table {
 }
 
 .client-home-alerts-active table{
-    max-height: 400px;
+    
     overflow-y: scroll;
 }
 .client-home-alerts-active{
-    max-height: 400px;
+    
     overflow-y: scroll; 
+}
+
+.client-home-alerts-active table tbody tr:nth-child(odd){
+    background: #FFA101;
+    color:#000;
+    border:0px;
+}
+.client-home-alerts-active table tbody tr span{
+    font-size: 14px;
+}
+.client-home-alerts-active table tbody tr:nth-child(even){
+    background: #F1C883;
+    color:#000;
+    border:0px;
+    
+}
+.client-home-alerts-active, .client-home-alerts{
+    width: 280px;
+    max-height: 500px;
+    overflow-y: scroll
+}
+.client-home{
+    min-height: 500px;
+}
+.client-home-alerts-active table, .client-home-alerts table{
+    width: 100%;
+}
+button.alert-btn{
+    height: 70px;
+    font-size: 20px;
+    pointer-events: none;
 }
 @media only screen and (max-width:1000px){
     .client-home-table-container{

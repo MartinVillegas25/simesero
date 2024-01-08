@@ -65,14 +65,15 @@ const socketController = (socket, io) => {
 		// Unir el socket a la sala correspondiente
 		socket.join(salaPedirCuenta);
 
-		const { nombre, metodo } = data;
-		console.log({ nombre, metodo });
+		const { nombre, metodo, dividir } = data;
+		console.log({ nombre, metodo, dividir });
 
 		const respuesta = ticketControl.guardarPedirCuenta(
 			usuario.email,
 			usuario.mesa,
 			nombre,
-			metodo
+			metodo,
+			dividir
 		);
 		callback(respuesta);
 
@@ -80,7 +81,8 @@ const socketController = (socket, io) => {
 			usuario.mesa,
 			nombre,
 			usuario.email,
-			metodo
+			metodo,
+			dividir
 		);
 		console.log('ticket de ticket control', ticket);
 
