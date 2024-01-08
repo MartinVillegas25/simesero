@@ -64,14 +64,16 @@ export default function ClientMenuConfig() {
 		setInput({
 			nombre: product.nombre || '', // Agrega el valor del nombre del producto
 			precio: product.precio || 0, // Agrega el valor del precio del producto
-			img: product.img || null
+			img: product.img || null,
+			descripcion: product.descripcion || ''
 		});
 	};
 
 	const [input, setInput] = useState({
 		nombre: '',
 		precio: 0,
-		img: null // Use null initially
+		img: null, // Use null initially
+		descripcion: ''
 	});
 
 	const handleChangeImg = (e) => {
@@ -97,7 +99,13 @@ export default function ClientMenuConfig() {
 				const formData = new FormData();
 				formData.append('nombre', input.nombre);
 				formData.append('precio', input.precio);
-				formData.append('img', input.img); // You can append the image to the FormData
+
+				// Solo agrega la imagen si se proporciona una nueva
+				if (input.img !== null) {
+					formData.append('img', input.img);
+				}
+
+				formData.append('descripcion', input.descripcion);
 
 				dispatch(modifyProduct(selectedProductForEdit.id, formData));
 				swal({
@@ -210,6 +218,13 @@ export default function ClientMenuConfig() {
 																			name="precio"
 																			id=""
 																			value={input.precio}
+																		/>
+																		<label htmlFor="">Descripcion:</label>
+																		<input
+																			type="text"
+																			name="descripcion"
+																			id=""
+																			value={input.descripcion}
 																		/>
 																		<label htmlFor="">Imagen:</label>
 																		<input

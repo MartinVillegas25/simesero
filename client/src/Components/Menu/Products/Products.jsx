@@ -25,7 +25,6 @@ export default function Products() {
 
 	const categories = useSelector((state) => state.menuCategories.categorias);
 	const products = useSelector((state) => state.localProducts);
-	console.log(products);
 
 	// Funcion para mostrar solo los productos correspondientes a la categoria seleccionada
 	const handleCategorySelection = (categoryName) => {
@@ -80,49 +79,54 @@ export default function Products() {
 								<h2 className="category-title">{categoria.categoria}</h2>
 								{categoria.subcategorias.map((subcategoria, subIndex) => (
 									<div key={subcategoria.subcategoria_id + subIndex}>
-										<h2 className="subcategory-title">
-											{subcategoria.subcategoria}
-										</h2>
-										<img
-											src={subcategoria.img}
-											alt=""
-											className="product-img"
-										/>
+										<div className="subcategory-container">
+											<h2 className="subcategory-title">
+												{subcategoria.subcategoria}
+											</h2>
+											<img
+												src={subcategoria.imgsubcategoria}
+												alt=""
+												className="subcategory-img"
+											/>
+										</div>
 										<ul className="products-list">
 											{subcategoria.productos.map((producto, prodIndex) => (
-												<li
-													key={producto.nombre + prodIndex}
-													className={`product-container ${
-														showConfirmation && addedProductId === producto.id
-															? 'confirmation-symbol'
-															: ''
-													}`}
-												>
-													<div className="product-info">
-														<p className="product-name">{producto.nombre}</p>
-														<p className="product-price">${producto.precio}</p>
-														<p className="product-name">
-															{producto.descripcion}
-														</p>
-													</div>
-													<div>
-														<img
-															src={producto.img}
-															alt={producto.nombre}
-															className="product-img"
-														/>
-													</div>
-													<div className="product-add">
-														<button
-															value={JSON.stringify(producto)}
-															onClick={(e) =>
-																handleAddToMinicart(e, producto.id)
-															}
-														>
-															+
-														</button>
-													</div>
-												</li>
+												<div key={producto.nombre + prodIndex}>
+													<li
+														className={`product-container ${
+															showConfirmation && addedProductId === producto.id
+																? 'confirmation-symbol'
+																: ''
+														}`}
+													>
+														<div className="product-info">
+															<p className="product-name">{producto.nombre}</p>
+															<p className="product-price">
+																${producto.precio}
+															</p>
+														</div>
+														<div>
+															<img
+																src={producto.img}
+																alt={producto.nombre}
+																className="product-img"
+															/>
+														</div>
+														<div className="product-add">
+															<button
+																value={JSON.stringify(producto)}
+																onClick={(e) =>
+																	handleAddToMinicart(e, producto.id)
+																}
+															>
+																+
+															</button>
+														</div>
+													</li>
+													<p className="product-description">
+														{producto.descripcion}
+													</p>
+												</div>
 											))}
 										</ul>
 									</div>

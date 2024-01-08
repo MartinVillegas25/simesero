@@ -12,6 +12,7 @@ export default function Pay() {
 	const [nombre, setNombre] = useState('');
 	const [payMethod, setPayMethod] = useState('');
 	const [payType, setPayType] = useState('');
+	const [comment, setComment] = useState('');
 	const dispatch = useDispatch();
 	const handleSetName = (e) => {
 		setNombre(e.target.value.toUpperCase());
@@ -25,6 +26,9 @@ export default function Pay() {
 		setPayType(e.target.value);
 	};
 
+	const handleComment = (e) => {
+		setComment(e.target.value);
+	};
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 
@@ -87,7 +91,15 @@ export default function Pay() {
 							<option value="pagar-total">Quiero pagar el total</option>
 							<option value="pagar-parte">Quiero pagar una parte</option>
 						</select>
-
+						<div className="payment-type-container">
+							<h2 htmlFor="">Comentario</h2>
+							<input
+								type="text"
+								value={comment}
+								onChange={handleComment}
+								placeholder="deje aqui su comentario"
+							/>
+						</div>
 						<button className="payment-btn" onClick={handleSubmit}>
 							Pedir la cuenta
 						</button>

@@ -53,15 +53,30 @@
 }
 
 /* Estilo para cada subcategoría */
-.subcategory-title {
-	color: #000;
+.subcategory-container {
+	position: relative;
+	display: flex; /* Ajusta según tus necesidades, esto permite que el contenedor se ajuste al contenido */
+	margin-bottom: 50px;
+}
 
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: normal;
-	text-align: start;
-	margin-left: 50px;
+.subcategory-title {
+	position: absolute;
+	top: 70%; /* Ajusta según sea necesario para centrar verticalmente el texto */
+	left: 15%; /* Ajusta según sea necesario para centrar horizontalmente el texto */
+	transform: translate(-50%, -50%); /* Centra el texto completamente */
+	color: black; /* Cambia el color del texto según tus preferencias */
+	z-index: 1; /* Asegura que el texto esté encima de la imagen */
+	font-size: 20px;
+}
+
+.subcategory-img {
+	width: 100%; /* Ajusta según tus necesidades */
+	height: 120px; /* Ajusta según tus necesidades */
+	display: block;
+	opacity: 0.7;
+	border: #ffa101 solid 1px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 /* Estilo para la lista de productos */
@@ -148,4 +163,11 @@
 
 .confirmation-symbol {
 	background-color: #00800021;
+}
+
+.product-description {
+	width: 300px;
+	color: #000;
+	font-size: x-small;
+	text-align: center;
 }
