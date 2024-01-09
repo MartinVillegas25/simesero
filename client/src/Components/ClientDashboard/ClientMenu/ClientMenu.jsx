@@ -100,7 +100,6 @@ export default function ClientMenu() {
 		formData.append('categoria', categorySelected);
 		formData.append('img', subcategImg);
 		dispatch(createSubCategory(formData));
-
 		setCategorySelected('');
 		setNewCategory('');
 
