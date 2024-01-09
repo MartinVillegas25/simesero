@@ -99,12 +99,7 @@ export default function ClientMenuConfig() {
 				const formData = new FormData();
 				formData.append('nombre', input.nombre);
 				formData.append('precio', input.precio);
-
-				// Solo agrega la imagen si se proporciona una nueva
-				if (input.img !== null) {
-					formData.append('img', input.img);
-				}
-
+				formData.append('img', input.img); // You can append the image to the FormData
 				formData.append('descripcion', input.descripcion);
 
 				dispatch(modifyProduct(selectedProductForEdit.id, formData));
@@ -219,7 +214,7 @@ export default function ClientMenuConfig() {
 																			id=""
 																			value={input.precio}
 																		/>
-																		<label htmlFor="">Descripcion:</label>
+																		<label htmlFor="">Comentario:</label>
 																		<input
 																			type="text"
 																			name="descripcion"
